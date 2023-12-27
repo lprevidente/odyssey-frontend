@@ -31,30 +31,31 @@
     <ion-list-header>
       <ion-label>Settings</ion-label>
     </ion-list-header>
-    <ion-item>
+    <ion-item routerLink="/tabs/profile/personal-information">
       <ion-icon name="person-circle-outline"></ion-icon>
       <ion-label>Personal Information</ion-label>
-      <ion-icon name="chevron-forward-outline"></ion-icon>
     </ion-item>
-    <ion-item>
+    <ion-item routerLink="/tabs/profile/notifications">
       <ion-icon name="notifications-outline"></ion-icon>
       <ion-label>Notifications</ion-label>
-      <ion-icon name="chevron-forward-outline"></ion-icon>
     </ion-item>
-    <ion-item>
+    <ion-item routerLink="/tabs/profile/settings">
       <ion-icon name="settings-outline"></ion-icon>
       <ion-label>App Settings</ion-label>
-      <ion-icon name="chevron-forward-outline"></ion-icon>
     </ion-item>
-    <ion-item>
+    <ion-item routerLink="/tabs/profile/security">
       <ion-icon name="shield-outline"></ion-icon>
       <ion-label>Security</ion-label>
-      <ion-icon name="chevron-forward-outline"></ion-icon>
     </ion-item>
   </ion-list>
 
   <div class="footer">
-    <a class="logout">Logout</a>
+    <ion-buttons
+      class="logout"
+      slot="end">
+      <ion-button>Logout</ion-button>
+    </ion-buttons>
+
     <p class="app-version">App Version 1.0.1</p>
   </div>
 </ion-content>

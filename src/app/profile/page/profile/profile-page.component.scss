@@ -45,7 +45,11 @@ ion-item {
 
   .logout {
     text-decoration: underline;
-    color: var(--ion-color-step-200) !important;
+    color: var(--ion-color-primary);
+
+    ion-button {
+      --padding-start: 0px;
+    }
   }
 
   .app-version {
