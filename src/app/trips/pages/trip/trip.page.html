@@ -19,30 +19,25 @@
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Amsterdam</ion-title>
-      <div class="interval">
-        <span class="h6">From</span>
-        <ion-datetime-button datetime="start-date"></ion-datetime-button>
-        <ion-modal [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime
-              presentation="date"
-              id="start-date">
-            </ion-datetime>
-          </ng-template>
-        </ion-modal>
-        <span class="h6">to</span>
-        <ion-datetime-button datetime="end-date"></ion-datetime-button>
-        <ion-modal [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime
-              presentation="date"
-              id="end-date">
-            </ion-datetime>
-          </ng-template>
-        </ion-modal>
-      </div>
+
+      <ion-chip>
+        <ion-icon name="calendar-outline"> </ion-icon>
+        <ion-label>21-27 Jul</ion-label>
+      </ion-chip>
+
+      <ion-chip>
+        <ion-icon name="people-outline"> </ion-icon>
+        <ion-label>1 guest</ion-label>
+      </ion-chip>
     </ion-toolbar>
   </ion-header>
 
   <app-timeline></app-timeline>
+
+  <ion-button
+    color="danger"
+    fill="clear"
+    class="place text-underlined mt-2">
+    <span>Delete Trip</span>
+  </ion-button>
 </ion-content>

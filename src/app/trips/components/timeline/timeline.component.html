@@ -19,19 +19,16 @@
           "></ng-container>
       }
       @default {
-        <ng-container
-          *ngTemplateOutlet="defaultEvent; context: { event }"></ng-container>
+        <ng-container *ngTemplateOutlet="defaultEvent; context: { event }">
+        </ng-container>
       }
     }
   </div>
 
-  <div class="timeline-item">
-    <ion-button fill="clear">
-      <ion-icon
-        style="margin-right: 5px"
-        name="add-circle-outline"></ion-icon>
-      Add event
-    </ion-button>
+  <div
+    class="timeline-item"
+    style="height: 50px">
+    <app-new-event></app-new-event>
   </div>
 </div>
 
@@ -41,20 +38,32 @@
   <div class="timeline-item-content">
     <div class="header">
       <span class="title">{{ event.title }}</span>
-      <div class="ticket">
-        <ion-icon name="ticket-outline"></ion-icon>
-        <span>{{ event.flightNumber }}</span>
+      <div>
+        <ion-button
+          fill="clear"
+          class="ticket">
+          <ion-icon name="ticket-outline"></ion-icon>
+          <span>{{ event.flightNumber }}</span>
+        </ion-button>
       </div>
     </div>
     <p class="description">{{ event.description }}</p>
     <div class="timeline-transportation">
       <div class="point">
-        <p class="place">{{ event.startPointPlace }}</p>
+        <ion-button
+          fill="clear"
+          class="place">
+          {{ event.startPointPlace }}
+        </ion-button>
         <p class="time">{{ event.startPointTime }}</p>
         <p class="line-dashed"></p>
       </div>
       <div class="point">
-        <p class="place">{{ event.endPointPlace }}</p>
+        <ion-button
+          fill="clear"
+          class="place">
+          {{ event.endPointPlace }}
+        </ion-button>
         <p class="time">{{ event.endPointTime }}</p>
       </div>
     </div>
@@ -75,7 +84,11 @@
     <div class="footer">
       <div class="place">
         <ion-icon name="location-outline"></ion-icon>
-        <span>{{ event.place }} </span>
+        <ion-button
+          fill="clear"
+          class="place">
+          {{ event.place }}
+        </ion-button>
       </div>
       <div
         *ngIf="event.expense"

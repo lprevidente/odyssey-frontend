@@ -6,7 +6,5 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./trip.page.scss"],
 })
 export class TripPage implements OnInit {
-  constructor() {}
-
   ngOnInit() {}
 }

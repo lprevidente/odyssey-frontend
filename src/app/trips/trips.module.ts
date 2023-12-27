@@ -6,9 +6,11 @@ import { AllTripsPage } from "./pages/all-trips/all-trips-page.component";
 import { TripsPageRoutingModule } from "./trips-routing.module";
 import { TripPage } from "./pages/trip/trip.page";
 import { TimelineComponent } from "./components/timeline/timeline.component";
+import { NewEventComponent } from "./components/new-event/new-event.component";
 
 @NgModule({
   imports: [IonicModule, CommonModule, FormsModule, TripsPageRoutingModule],
-  declarations: [AllTripsPage, TripPage, TimelineComponent],
+  declarations: [AllTripsPage, TripPage, TimelineComponent, NewEventComponent],
+  providers: [],
 })
 export class TripsPageModule {}

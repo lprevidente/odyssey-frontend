@@ -1,7 +1,6 @@
 {
   "name": "Travel Planner",
   "short_name": "Odyssey",
-  "theme_color": "#ffc409",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",

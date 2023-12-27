@@ -34,6 +34,7 @@
 
     .name,
     .date,
+    .shared-with,
     .price {
       z-index: 1;
       position: absolute;
@@ -61,6 +62,21 @@
     .price {
       bottom: 0;
       left: 0;
+    }
+
+    .shared-with {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      bottom: 10px;
+      right: 10px;
+      height: 30px;
+
+      ion-avatar {
+        border: 2px solid #f8f8f8f8;
+        height: 30px;
+        width: 30px;
+      }
     }
   }
 }
