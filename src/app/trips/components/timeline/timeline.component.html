@@ -1,0 +1,88 @@
+<ion-list-header>
+  <ion-label>21 Jul</ion-label>
+</ion-list-header>
+<div class="timeline">
+  <div
+    class="timeline-item"
+    *ngFor="let event of timelineEvents">
+    <div class="timeline-item-marker">
+      <ion-icon [name]="event.icon"></ion-icon>
+      <p>{{ event.time }}</p>
+    </div>
+
+    @switch (event.type) {
+      @case ("transportation") {
+        <ng-container
+          *ngTemplateOutlet="
+            transportationEvent;
+            context: { event }
+          "></ng-container>
+      }
+      @default {
+        <ng-container
+          *ngTemplateOutlet="defaultEvent; context: { event }"></ng-container>
+      }
+    }
+  </div>
+
+  <div class="timeline-item">
+    <ion-button fill="clear">
+      <ion-icon
+        style="margin-right: 5px"
+        name="add-circle-outline"></ion-icon>
+      Add event
+    </ion-button>
+  </div>
+</div>
+
+<ng-template
+  let-event="event"
+  #transportationEvent>
+  <div class="timeline-item-content">
+    <div class="header">
+      <span class="title">{{ event.title }}</span>
+      <div class="ticket">
+        <ion-icon name="ticket-outline"></ion-icon>
+        <span>{{ event.flightNumber }}</span>
+      </div>
+    </div>
+    <p class="description">{{ event.description }}</p>
+    <div class="timeline-transportation">
+      <div class="point">
+        <p class="place">{{ event.startPointPlace }}</p>
+        <p class="time">{{ event.startPointTime }}</p>
+        <p class="line-dashed"></p>
+      </div>
+      <div class="point">
+        <p class="place">{{ event.endPointPlace }}</p>
+        <p class="time">{{ event.endPointTime }}</p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template
+  let-event="event"
+  #defaultEvent>
+  <div class="timeline-item-content">
+    <div class="header">
+      <span class="title">{{ event.title }}</span>
+      <div class="ticket">
+        <ion-icon name="ticket-outline"></ion-icon>
+      </div>
+    </div>
+    <p class="description">{{ event.description }}</p>
+    <div class="footer">
+      <div class="place">
+        <ion-icon name="location-outline"></ion-icon>
+        <span>{{ event.place }} </span>
+      </div>
+      <div
+        *ngIf="event.expense"
+        class="expense">
+        <ion-icon name="wallet-outline"></ion-icon>
+        <span>{{ event.expense | currency }} </span>
+      </div>
+    </div>
+  </div>
+</ng-template>
