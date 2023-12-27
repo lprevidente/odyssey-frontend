@@ -1,0 +1,21 @@
+<div
+  [style.width]="size"
+  [style.height]="size"
+  class="avatar-container ion-activatable"
+  (click)="changeAvatar()">
+  <ion-ripple-effect></ion-ripple-effect>
+  <img
+    [src]="imageUrl"
+    [alt]="altText"
+    class="avatar-image" />
+  <input
+    type="file"
+    accept="image/*"
+    (change)="onFileSelected($event)"
+    #fileInput
+    style="display: none" />
+  <ion-icon
+    name="pencil"
+    class="edit-icon">
+  </ion-icon>
+</div>

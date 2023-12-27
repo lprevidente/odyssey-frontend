@@ -1,30 +1,49 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
-        "project": ["tsconfig.json"],
+        "project": [
+          "tsconfig.json"
+        ],
         "createDefaultProgram": true
       },
       "extends": [
-        "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "eslint:recommended",
+        "plugin:@angular-eslint/recommended"
       ],
       "rules": {
+        "camelcase": "warn",
+        "@typescript-eslint/explicit-function-return-type": "error",
+        "@typescript-eslint/explicit-member-accessibility": "error",
         "@angular-eslint/component-class-suffix": [
-          "error",
+          "warn",
           {
-            "suffixes": ["Page", "Component"]
+            "suffixes": [
+              "Page",
+              "Component"
+            ]
           }
         ],
-        "@angular-eslint/component-selector": [
-          "error",
+        "@typescript-eslint/naming-convention": [
+          "warn",
           {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
+            "selector": "memberLike",
+            "modifiers": [
+              "private"
+            ],
+            "format": [
+              "camelCase"
+            ],
+            "leadingUnderscore": "require"
           }
         ],
         "@angular-eslint/directive-selector": [
@@ -34,13 +53,38 @@
             "prefix": "app",
             "style": "camelCase"
           }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
         ]
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
-      "rules": {}
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/template/button-has-type": [
+          "error"
+        ],
+        "@angular-eslint/template/no-duplicate-attributes": [
+          "error"
+        ],
+        "@angular-eslint/template/conditional-complexity": [
+          "warn"
+        ],
+        "@angular-eslint/template/use-track-by-function": [
+          "warn"
+        ]
+      }
     }
   ]
 }

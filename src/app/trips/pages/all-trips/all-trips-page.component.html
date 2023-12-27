@@ -1,0 +1,38 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-title> Tab 3</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">My Trips</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="trips-type">
+    <span>Active</span>
+    <span class="selected">Upcoming</span>
+    <span>Past</span>
+  </div>
+
+  <div class="trips">
+    <ion-card>
+      <span class="date">Jul 5 - Jul 21</span>
+      <span class="name">Austria</span>
+      <img
+        alt="Trip to Austria"
+        src="assets/img/austria.jpg" />
+      <span class="price">360 $</span>
+    </ion-card>
+    <ion-card>
+      <span class="date">Aug 1 - Aug 8</span>
+      <img
+        alt="Trip to Amsterdam"
+        src="assets/img/amsterdam.jpg" />
+      <span class="name">Amsterdam</span>
+      <span class="price">480 $</span>
+    </ion-card>
+  </div>
+</ion-content>

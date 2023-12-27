@@ -1,0 +1,66 @@
+.trips-type {
+  display: flex;
+  margin-left: 15px;
+  flex-direction: row;
+
+  span {
+    margin: 10px;
+
+    &.selected {
+      font-weight: 700;
+
+      &:after {
+        margin-top: 5px;
+        content: "";
+        display: block;
+        border-bottom: 2px solid var(--ion-color-primary);
+      }
+    }
+  }
+}
+
+.trips {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+  ion-card {
+    height: 150px;
+
+    img {
+      filter: brightness(60%);
+    }
+
+    .name,
+    .date,
+    .price {
+      z-index: 1;
+      position: absolute;
+      color: white;
+      text-shadow: 2px 2px 4px #000000;
+    }
+
+    .name {
+      font-weight: 700;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      font-size: 26px;
+    }
+
+    .date,
+    .price {
+      margin: 10px;
+    }
+
+    .date {
+      font-weight: 200;
+    }
+
+    .price {
+      bottom: 0;
+      left: 0;
+    }
+  }
+}

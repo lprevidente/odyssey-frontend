@@ -1,0 +1,23 @@
+{
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "semi": true,
+  "endOfLine": "auto",
+  "bracketSameLine": true,
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "singleAttributePerLine": true,
+  "overrides": [
+    {
+      "files": [
+        "**/*.css",
+        "**/*.scss",
+        "**/*.html",
+        "**/*.ts"
+      ],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
+}
