@@ -1,4 +1,4 @@
-import { isDevMode, NgModule } from "@angular/core";
+import { InjectionToken, isDevMode, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouteReuseStrategy } from "@angular/router";
 
@@ -7,11 +7,16 @@ import { IonicModule, IonicRouteStrategy } from "@ionic/angular";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
+import { environment } from "../environments/environment";
+import { HttpClientModule } from "@angular/common/http";
+
+export const BASE_PATH = new InjectionToken<string>("Base path for the API");
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
@@ -19,7 +24,13 @@ import { ServiceWorkerModule } from "@angular/service-worker";
       registrationStrategy: "registerWhenStable:30000",
     }),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: BASE_PATH,
+      useValue: environment.basePath,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -6,7 +6,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  public ngOnInit() {
+  public ngOnInit(): void {
     // Use matchMedia to check the user preference
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -24,11 +24,5 @@ export class AppComponent implements OnInit {
     document
       .querySelector('meta[name="theme-color"]')
       ?.setAttribute("content", isDark ? "#000000" : "#ffd534");
-
-    console.log(
-      document
-        .querySelector('meta[name="theme-color"]')
-        ?.getAttribute("content")
-    );
   }
 }

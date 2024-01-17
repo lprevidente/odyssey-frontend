@@ -1,0 +1,167 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-title>Log in</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  class="ion-padding"
+  [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Log in</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <p class="subtitle">Log in to start planning your next trip.</p>
+
+  <form
+    [formGroup]="form"
+    class="form">
+    <ion-input
+      mode="md"
+      formControlName="email"
+      label="Email"
+      labelPlacement="stacked"
+      fill="outline"
+      errorText="Please enter a valid email">
+    </ion-input>
+
+    <ion-input
+      [type]="showPassword ? 'text' : 'password'"
+      mode="md"
+      formControlName="password"
+      label="Password"
+      labelPlacement="stacked"
+      fill="outline">
+      <!-- icon that show or hide password -->
+      <ion-button
+        fill="clear"
+        slot="end"
+        (click)="showPassword = !showPassword;"
+        aria-label="Show/hide">
+        <ion-icon
+          slot="icon-only"
+          aria-hidden="true"
+          [name]="showPassword ? 'eye' : 'eye-off'">
+        </ion-icon>
+      </ion-button>
+    </ion-input>
+
+    <ion-buttons class="mb-1 forgot-password">
+      <ion-button
+        size="small"
+        routerLink="/auth/login">
+        Forgot Password?
+      </ion-button>
+    </ion-buttons>
+
+    <ion-button
+      (click)="login()"
+      type="submit"
+      expand="block"
+      class="m0-auto"
+      color="primary">
+      Continue
+    </ion-button>
+  </form>
+
+  <div class="divider">
+    <span>or</span>
+  </div>
+
+  <div class="social-media">
+    <ion-button expand="block">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="w-4 h-4 mr-2">
+        <path
+          d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+      </svg>
+      Continue with Facebook
+    </ion-button>
+    <ion-button expand="block">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="w-4 h-4 mr-2">
+        <circle
+          cx="12"
+          cy="12"
+          r="10"></circle>
+        <circle
+          cx="12"
+          cy="12"
+          r="4"></circle>
+        <line
+          x1="21.17"
+          x2="12"
+          y1="8"
+          y2="8"></line>
+        <line
+          x1="3.95"
+          x2="8.54"
+          y1="6.06"
+          y2="14"></line>
+        <line
+          x1="10.88"
+          x2="15.46"
+          y1="21.94"
+          y2="14"></line>
+      </svg>
+
+      Continue with Google
+    </ion-button>
+    <!-- Apple -->
+    <ion-button expand="block">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="w-4 h-4 mr-2">
+        <path
+          d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"></path>
+        <path d="M10 2c1 .5 2 2 2 5"></path>
+      </svg>
+      Continue with Apple
+    </ion-button>
+  </div>
+
+  <ion-buttons class="mt-2">
+    <ion-button
+      size="small"
+      class="signup"
+      routerLink="/auth/signup">
+      You don't have an account? Sign up!
+    </ion-button>
+  </ion-buttons>
+
+  <ion-toast
+    [isOpen]="wrongCredentials"
+    color="danger"
+    message="Wrong credentials!"
+    (didDismiss)="wrongCredentials = false"
+    [duration]="5000">
+  </ion-toast>
+</ion-content>

@@ -29,6 +29,13 @@
 
 .form {
   ion-input {
-    padding: 10px 10px !important;
+    padding: 10px 0 !important;
+
+    --highlight-color-valid: var(--ion-color-primary) !important;
   }
+}
+
+.subtitle {
+  font-weight: 500;
+  color: var(--ion-color-medium-tint);
 }
