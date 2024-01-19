@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
   styleUrls: ["profile-page.component.scss"],
 })
 export class ProfilePage {
-  constructor(
+  public constructor(
     private _authService: AuthService,
     private _router: Router
   ) {}

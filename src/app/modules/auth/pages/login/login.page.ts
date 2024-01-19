@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-login",
@@ -19,7 +20,7 @@ export class LoginPage {
     email: FormControl<string>;
     password: FormControl<string>;
   }>;
-  protected wrongCredentials = false;
+  protected wrongCredentials$ = new Subject<boolean>();
   protected showPassword = false;
 
   public constructor(
@@ -38,7 +39,7 @@ export class LoginPage {
 
     this._authService.login(this.form.getRawValue()).subscribe({
       next: () => this._router.navigateByUrl("/tabs"),
-      error: () => (this.wrongCredentials = true),
+      error: () => this.wrongCredentials$.next(true),
     });
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import {
   AbstractControl,
   FormBuilder,
@@ -9,11 +9,14 @@ import {
 } from "@angular/forms";
 import { AuthService } from "@modules/auth/services/auth.service";
 import { Router } from "@angular/router";
+import { Subject } from "rxjs";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-signup",
   templateUrl: "./signup.page.html",
   styleUrls: ["./signup.page.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignupPage {
   protected readonly form: FormGroup<{
@@ -24,10 +27,11 @@ export class SignupPage {
     confirmPassword: FormControl<string>;
   }>;
   private readonly _passwordRegEx =
-    /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+    /^(?=.*[0-9])(?=.*[a-z])(?=.*[@#$%^&+=-_!])(?=\S+$).{8,}$/;
   protected showPassword = false;
   protected passwordDontMatch = false;
-  protected errorSignUp = false;
+  protected emailAlreadyExists$ = new Subject<boolean>();
+  protected errorSignUp$ = new Subject<boolean>();
 
   private _passwordMatchValidator = (
     control: AbstractControl<unknown>
@@ -52,7 +56,10 @@ export class SignupPage {
         firstName: ["", Validators.required],
         lastName: ["", Validators.required],
         email: ["", [Validators.required, Validators.email]],
-        password: ["", [Validators.required]],
+        password: [
+          "",
+          [Validators.required, Validators.pattern(this._passwordRegEx)],
+        ],
         confirmPassword: ["", Validators.required],
       },
       { validators: this._passwordMatchValidator }
@@ -75,7 +82,12 @@ export class SignupPage {
       })
       .subscribe({
         next: () => this._router.navigateByUrl("/tabs"),
-        error: () => (this.errorSignUp = true),
+        error: (error: HttpErrorResponse) => {
+          console.log(error);
+          if (error.error.title === "email_already_exist")
+            this.emailAlreadyExists$.next(true);
+          else this.errorSignUp$.next(true);
+        },
       });
   }
 }
