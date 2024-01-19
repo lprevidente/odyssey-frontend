@@ -36,7 +36,7 @@ export class LoginPage {
   protected login(): void {
     if (this.form.invalid) return;
 
-    this._authService.login(this.form.value).subscribe({
+    this._authService.login(this.form.getRawValue()).subscribe({
       next: () => this._router.navigateByUrl("/tabs"),
       error: () => (this.wrongCredentials = true),
     });

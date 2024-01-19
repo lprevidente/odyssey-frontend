@@ -47,8 +47,8 @@
     </ion-input>
 
     <ion-input
+      [type]="showPassword ? 'text' : 'password'"
       mode="md"
-      type="password"
       formControlName="password"
       label="Password"
       labelPlacement="stacked"
@@ -65,6 +65,11 @@
         </ion-icon>
       </ion-button>
     </ion-input>
+
+    <ion-text class="hint">
+      The password must have one uppercase letter, one lowercase letter, one
+      number and one special character.
+    </ion-text>
 
     <ion-input
       mode="md"
@@ -84,4 +89,20 @@
       Sign up
     </ion-button>
   </form>
+
+  <ion-toast
+    [isOpen]="passwordDontMatch"
+    color="danger"
+    message="The passwords don't match."
+    (didDismiss)="passwordDontMatch = false"
+    [duration]="5000">
+  </ion-toast>
+
+  <ion-toast
+    [isOpen]="errorSignUp"
+    color="danger"
+    message="There was an error signing up. Please try again."
+    (didDismiss)="errorSignUp = false"
+    [duration]="5000">
+  </ion-toast>
 </ion-content>

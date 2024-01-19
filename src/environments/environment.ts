@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  basePath: "https://localhost:8081/v1",
+  basePath: "http://192.168.64.1:9000",
 };
 
 /*

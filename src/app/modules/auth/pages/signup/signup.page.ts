@@ -7,6 +7,8 @@ import {
   ValidationErrors,
   Validators,
 } from "@angular/forms";
+import { AuthService } from "@modules/auth/services/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-signup",
@@ -24,6 +26,8 @@ export class SignupPage {
   private readonly _passwordRegEx =
     /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
   protected showPassword = false;
+  protected passwordDontMatch = false;
+  protected errorSignUp = false;
 
   private _passwordMatchValidator = (
     control: AbstractControl<unknown>
@@ -38,17 +42,17 @@ export class SignupPage {
       : null;
   };
 
-  public constructor(private _formBuilder: FormBuilder) {
+  public constructor(
+    private _formBuilder: FormBuilder,
+    private _authService: AuthService,
+    private _router: Router
+  ) {
     this.form = this._formBuilder.nonNullable.group(
       {
         firstName: ["", Validators.required],
         lastName: ["", Validators.required],
-        email: ["", Validators.required, Validators.email],
-        password: [
-          "",
-          Validators.required,
-          Validators.pattern(this._passwordRegEx),
-        ],
+        email: ["", [Validators.required, Validators.email]],
+        password: ["", [Validators.required]],
         confirmPassword: ["", Validators.required],
       },
       { validators: this._passwordMatchValidator }
@@ -56,6 +60,22 @@ export class SignupPage {
   }
 
   protected submit(): void {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      if (this.form.hasError("passwordMismatch")) this.passwordDontMatch = true;
+      return;
+    }
+
+    this._authService
+      .signup({
+        ...this.form.getRawValue(),
+        appSettings: {
+          language: navigator.language ?? "en",
+          currency: navigator.language === "en" ? "USD" : "EUR",
+        },
+      })
+      .subscribe({
+        next: () => this._router.navigateByUrl("/tabs"),
+        error: () => (this.errorSignUp = true),
+      });
   }
 }
