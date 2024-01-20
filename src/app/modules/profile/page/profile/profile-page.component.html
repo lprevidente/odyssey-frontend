@@ -14,15 +14,21 @@
   </ion-header>
 
   <div class="profile-container">
-    <div class="profile-info">
+    <div
+      class="profile-info"
+      *ngIf="profile$ | async as profile">
       <app-avatar
         size="60px"
-        imageUrl="https://www.w3schools.com/howto/img_avatar.png"
+        imageUrl="https://www.w3schools.com/howto/img_avatar{{
+          profile.sex === 'F' ? '2' : ''
+        }}.png"
         altText="Alt Text">
       </app-avatar>
       <ion-text>
-        <p class="full-name">Luigi Previdente</p>
-        <p class="see-profile">lprevidente&#64;gmail.com</p>
+        <p class="full-name">
+          {{ profile.firstName + " " + profile.lastName }}
+        </p>
+        <p class="see-profile">{{ profile.email }}</p>
       </ion-text>
     </div>
   </div>
@@ -56,6 +62,6 @@
       <ion-button (click)="logout()">Logout</ion-button>
     </ion-buttons>
 
-    <p class="app-version">App Version 1.0.1</p>
+    <p class="app-version">App Version 1.0.0</p>
   </div>
 </ion-content>

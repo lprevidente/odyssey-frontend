@@ -43,10 +43,8 @@ export class LoginPage {
     this._authService
       .login(this.form.getRawValue())
       .subscribe({
-        next: () => {
-          this.form.reset();
-          return this._router.navigateByUrl("/tabs");
-        },
+        next: () =>
+          this._router.navigateByUrl("/tabs").then(() => this.form.reset()),
         error: () => this.wrongCredentials$.next(true),
       })
       .add(() => this._loadingService.hideLoading());

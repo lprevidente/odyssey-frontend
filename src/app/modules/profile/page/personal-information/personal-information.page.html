@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/profile"></ion-back-button>
     </ion-buttons>
-    <ion-title>Edit Personal Info</ion-title>
+    <ion-title>Personal Info</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="saveChanges()">Save</ion-button>
     </ion-buttons>
@@ -15,22 +15,28 @@
   [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Edit personal info</ion-title>
+      <ion-title size="large">Personal info</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div class="form">
+  <p class="subtitle">
+    Here there are your personal information, that you can edit.
+  </p>
+
+  <form
+    [formGroup]="form"
+    class="form">
     <ion-input
       mode="md"
+      formControlName="firstName"
       label="First name"
       labelPlacement="stacked"
-      fill="outline"
-      errorText="Please enter a valid email"
-      required>
+      fill="outline">
     </ion-input>
 
     <ion-input
       mode="md"
+      formControlName="lastName"
       label="Last name"
       labelPlacement="stacked"
       fill="outline">
@@ -38,11 +44,39 @@
 
     <ion-input
       mode="md"
+      formControlName="email"
       type="email"
       label="Email"
       labelPlacement="stacked"
-      errorText="Invalid email"
+      errorText="Enter a valid email"
       fill="outline">
     </ion-input>
-  </div>
+
+    <ion-select
+      mode="md"
+      fill="outline"
+      labelPlacement="stacked"
+      label="Sex"
+      formControlName="sex">
+      <ion-select-option value="M">Male</ion-select-option>
+      <ion-select-option value="F">Female</ion-select-option>
+      <ion-select-option value="O">Other</ion-select-option>
+    </ion-select>
+  </form>
+
+  <ion-toast
+    [isOpen]="(saved$ | async) === true"
+    (didDismiss)="saved$.next(false)"
+    color="success"
+    message="Changes saved successfully!"
+    [duration]="3000">
+  </ion-toast>
+
+  <ion-toast
+    [isOpen]="(error$ | async) === false"
+    (didDismiss)="error$.next(false)"
+    color="danger"
+    message="Something went wrong, please try again."
+    [duration]="3000">
+  </ion-toast>
 </ion-content>

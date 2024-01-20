@@ -8,7 +8,9 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { AuthInterceptor } from "@core/interceptors/auth.interceptor";
+import { RefreshTokenInterceptor } from "@core/interceptors/refresh-token.interceptor";
 
 export const BASE_PATH = new InjectionToken<string>("Base path for the API");
 
@@ -26,6 +28,12 @@ export const BASE_PATH = new InjectionToken<string>("Base path for the API");
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RefreshTokenInterceptor,
+      multi: true,
+    },
     {
       provide: BASE_PATH,
       useValue: environment.basePath,

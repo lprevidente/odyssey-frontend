@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: "", pathMatch: "full", component: ProfilePage },
   { path: "personal-information", component: PersonalInformationPage },
   { path: "notifications", component: NotificationsPage },
+  { path: "**", redirectTo: "" },
 ];
 
 @NgModule({

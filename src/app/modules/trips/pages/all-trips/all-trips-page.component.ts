@@ -5,4 +5,8 @@ import { Component } from "@angular/core";
   templateUrl: "all-trips-page.component.html",
   styleUrls: ["all-trips-page.component.scss"],
 })
-export class AllTripsPage {}
+export class AllTripsPage {
+  constructor() {
+    console.log("AllTripsPage.constructor");
+  }
+}
