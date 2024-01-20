@@ -8,6 +8,7 @@ import {
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
+import { LoadingService } from "@core/services/loading.service";
 
 @Component({
   selector: "app-login",
@@ -26,7 +27,8 @@ export class LoginPage {
   public constructor(
     private _formBuilder: FormBuilder,
     private _authService: AuthService,
-    private _router: Router
+    private _router: Router,
+    private _loadingService: LoadingService
   ) {
     this.form = this._formBuilder.nonNullable.group({
       email: ["", [Validators.required, Validators.email]],
@@ -37,9 +39,16 @@ export class LoginPage {
   protected login(): void {
     if (this.form.invalid) return;
 
-    this._authService.login(this.form.getRawValue()).subscribe({
-      next: () => this._router.navigateByUrl("/tabs"),
-      error: () => this.wrongCredentials$.next(true),
-    });
+    this._loadingService.showLoading();
+    this._authService
+      .login(this.form.getRawValue())
+      .subscribe({
+        next: () => {
+          this.form.reset();
+          return this._router.navigateByUrl("/tabs");
+        },
+        error: () => this.wrongCredentials$.next(true),
+      })
+      .add(() => this._loadingService.hideLoading());
   }
 }

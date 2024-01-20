@@ -1,3 +1,9 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>
+
+<ion-loading
+  [isOpen]="(isLoading$ | async) === true"
+  [duration]="3000"
+  message="Please wait...">
+</ion-loading>

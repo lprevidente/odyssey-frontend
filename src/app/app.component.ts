@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { LoadingService } from "@core/services/loading.service";
 
 @Component({
   selector: "app-root",
@@ -6,6 +7,12 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["app.component.scss"],
 })
 export class AppComponent implements OnInit {
+  protected readonly isLoading$;
+
+  constructor(private _loadingService: LoadingService) {
+    this.isLoading$ = this._loadingService.isLoading$;
+  }
+
   public ngOnInit(): void {
     // Use matchMedia to check the user preference
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");

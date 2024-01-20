@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
-  ValidationErrors,
   Validators,
 } from "@angular/forms";
 import { AuthService } from "@modules/auth/services/auth.service";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { HttpErrorResponse } from "@angular/common/http";
+import { passwordMatchValidator } from "@core/validators/password.validator";
+import { LoadingService } from "@core/services/loading.service";
 
 @Component({
   selector: "app-signup",
@@ -33,23 +33,11 @@ export class SignupPage {
   protected emailAlreadyExists$ = new Subject<boolean>();
   protected errorSignUp$ = new Subject<boolean>();
 
-  private _passwordMatchValidator = (
-    control: AbstractControl<unknown>
-  ): ValidationErrors | null => {
-    const password = control.get("password");
-    const confirmPassword = control.get("confirmPassword");
-
-    return password &&
-      confirmPassword &&
-      password.value !== confirmPassword.value
-      ? { passwordMismatch: true }
-      : null;
-  };
-
   public constructor(
     private _formBuilder: FormBuilder,
     private _authService: AuthService,
-    private _router: Router
+    private _router: Router,
+    private _loadingService: LoadingService
   ) {
     this.form = this._formBuilder.nonNullable.group(
       {
@@ -62,7 +50,7 @@ export class SignupPage {
         ],
         confirmPassword: ["", Validators.required],
       },
-      { validators: this._passwordMatchValidator }
+      { validators: passwordMatchValidator }
     );
   }
 
@@ -71,6 +59,8 @@ export class SignupPage {
       if (this.form.hasError("passwordMismatch")) this.passwordDontMatch = true;
       return;
     }
+
+    this._loadingService.showLoading();
 
     this._authService
       .signup({
@@ -81,13 +71,16 @@ export class SignupPage {
         },
       })
       .subscribe({
-        next: () => this._router.navigateByUrl("/tabs"),
+        next: () => {
+          this.form.reset();
+          this._router.navigateByUrl("/tabs");
+        },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
           if (error.error.title === "email_already_exist")
             this.emailAlreadyExists$.next(true);
           else this.errorSignUp$.next(true);
         },
-      });
+      })
+      .add(() => this._loadingService.hideLoading());
   }
 }
