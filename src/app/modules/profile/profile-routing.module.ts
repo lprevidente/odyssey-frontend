@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { ProfilePage } from "./page/profile/profile.page";
-import { PersonalInformationPage } from "./page/personal-information/personal-information.page";
-import { NotificationsPage } from "./page/notifications/notifications.page";
-import { SecurityComponent } from "@modules/profile/page/security/security.page";
+import { ProfilePage } from "@modules/profile/pages/profile/profile.page";
+import { PersonalInformationPage } from "@modules/profile/pages/personal-information/personal-information.page";
+import { NotificationsPage } from "@modules/profile/pages/notifications/notifications.page";
+import { SecurityComponent } from "@modules/profile/pages/security/security.page";
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: ProfilePage },

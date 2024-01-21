@@ -14,7 +14,7 @@ export class NewEventComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.presentingElement = document.querySelector(".ion-page");
+    this.presentingElement = document.querySelector(".ion-pages");
   }
 
   onWillDismiss($event: any) {
