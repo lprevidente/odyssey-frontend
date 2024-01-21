@@ -6,6 +6,7 @@
       class="logout"
       slot="end">
       <ion-button
+        id="open-action-sheet"
         color="danger"
         class="text-underlined">
         Delete
@@ -13,3 +14,10 @@
     </ion-buttons>
   </div>
 </div>
+
+<ion-action-sheet
+  trigger="open-action-sheet"
+  header="Actions"
+  (didDismiss)="actionResult($event)"
+  [buttons]="actionSheetButtons">
+</ion-action-sheet>

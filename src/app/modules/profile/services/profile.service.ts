@@ -24,4 +24,8 @@ export class ProfileService {
   public updateProfile(profile: Omit<Profile, "avatarURL">): Observable<void> {
     return this._httpClient.put<void>(this._endpoint, profile);
   }
+
+  public deleteProfile(): Observable<void> {
+    return this._httpClient.delete<void>(this._endpoint);
+  }
 }
