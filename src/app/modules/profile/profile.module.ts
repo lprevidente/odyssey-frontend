@@ -11,6 +11,7 @@ import { SecurityComponent } from "@modules/profile/pages/security/security.page
 import { LastUpdatePasswordComponent } from "@modules/profile/components/last-update-password/last-update-password.component";
 import { DeviceHistoryComponent } from "@modules/profile/components/device-history/device-history.component";
 import { DeleteAccountComponent } from "@modules/profile/components/delete-account/delete-account.component";
+import { AppSettingsPage } from "@modules/profile/pages/app-settings/app-settings.page";
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { DeleteAccountComponent } from "@modules/profile/components/delete-accou
   declarations: [
     ProfilePage,
     DeviceHistoryComponent,
+    AppSettingsPage,
     SecurityComponent,
     AvatarComponent,
     PersonalInformationPage,
