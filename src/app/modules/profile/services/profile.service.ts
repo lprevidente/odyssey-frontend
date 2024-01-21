@@ -10,7 +10,7 @@ import { Profile } from "@modules/profile/models/profile";
 export class ProfileService {
   private readonly _endpoint: string;
 
-  constructor(
+  public constructor(
     private _httpClient: HttpClient,
     @Inject(BASE_PATH) private _basePath: string
   ) {

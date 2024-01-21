@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Security</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  class="ion-padding"
+  [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Security</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <app-last-update-password></app-last-update-password>
+  <div class="divider"></div>
+
+  <div class="device-history">
+    <h1 class="text-bold">Device history</h1>
+    <div class="device-history-item">
+      <ion-icon
+        size="large"
+        name="laptop-outline">
+      </ion-icon>
+      <div>
+        <div class="device">
+          <p class="operating-system">OS X 10.15.7</p>
+          <p class="browser">Safari</p>
+        </div>
+
+        <div class="location-time">
+          <span class="location">Orta di Atella, Campania</span>
+          <span class="time">Today, 10:30 AM</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="device-history-item">
+      <ion-icon
+        size="large"
+        name="phone-portrait-outline">
+      </ion-icon>
+      <div>
+        <div class="device">
+          <p class="operating-system">OS X 10.15.7</p>
+          <p class="browser">Safari</p>
+        </div>
+
+        <div class="location-time">
+          <span class="location">Orta di Atella, Campania</span>
+          <span class="time">Today, 10:30 AM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="account">
+    <h1 class="text-bold">Account</h1>
+    <div class="mt-2">
+      <div class="password">
+        <p class="description">Deactivate your account</p>
+        <ion-buttons
+          class="logout"
+          slot="end">
+          <ion-button
+            color="danger"
+            class="text-underlined">
+            Deactivate
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+  </div>
+
+  <!-- Device History-->
+</ion-content>

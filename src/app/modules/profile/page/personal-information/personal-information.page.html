@@ -1,12 +1,9 @@
-<ion-header [translucent]="false">
+<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/profile"></ion-back-button>
     </ion-buttons>
     <ion-title>Personal Info</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="saveChanges()">Save</ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -25,6 +22,7 @@
 
   <form
     [formGroup]="form"
+    (ngSubmit)="saveChanges()"
     class="form">
     <ion-input
       mode="md"
@@ -62,21 +60,13 @@
       <ion-select-option value="F">Female</ion-select-option>
       <ion-select-option value="O">Other</ion-select-option>
     </ion-select>
+
+    <ion-button
+      type="submit"
+      expand="block"
+      class="mt-1"
+      color="primary">
+      Confirm
+    </ion-button>
   </form>
-
-  <ion-toast
-    [isOpen]="(saved$ | async) === true"
-    (didDismiss)="saved$.next(false)"
-    color="success"
-    message="Changes saved successfully!"
-    [duration]="3000">
-  </ion-toast>
-
-  <ion-toast
-    [isOpen]="(error$ | async) === false"
-    (didDismiss)="error$.next(false)"
-    color="danger"
-    message="Something went wrong, please try again."
-    [duration]="3000">
-  </ion-toast>
 </ion-content>

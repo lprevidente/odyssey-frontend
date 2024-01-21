@@ -89,28 +89,4 @@
       Sign up
     </ion-button>
   </form>
-
-  <ion-toast
-    [isOpen]="passwordDontMatch"
-    color="warning"
-    message="The passwords don't match."
-    (didDismiss)="passwordDontMatch = false"
-    [duration]="5000">
-  </ion-toast>
-
-  <ion-toast
-    [isOpen]="(emailAlreadyExists$ | async) === true"
-    color="danger"
-    message="There was an error signing up. Please try again."
-    (didDismiss)="errorSignUp$.next(false)"
-    [duration]="5000">
-  </ion-toast>
-
-  <ion-toast
-    [isOpen]="(emailAlreadyExists$ | async) === true"
-    color="danger"
-    message="Email already exists."
-    (didDismiss)="emailAlreadyExists$.next(false)"
-    [duration]="5000">
-  </ion-toast>
 </ion-content>

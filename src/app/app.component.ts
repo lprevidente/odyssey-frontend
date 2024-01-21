@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { LoadingService } from "@core/services/loading.service";
+import { ToastSavingService } from "@core/services/toast-saving.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-root",
@@ -9,8 +11,27 @@ import { LoadingService } from "@core/services/loading.service";
 export class AppComponent implements OnInit {
   protected readonly isLoading$;
 
-  constructor(private _loadingService: LoadingService) {
+  public constructor(
+    private _loadingService: LoadingService,
+    private _toastSavingService: ToastSavingService
+  ) {
     this.isLoading$ = this._loadingService.isLoading$;
+  }
+
+  protected get saved$(): Observable<boolean> {
+    return this._toastSavingService.saved$;
+  }
+
+  protected get error$(): Observable<string | null> {
+    return this._toastSavingService.error$;
+  }
+
+  protected hideSaved(): void {
+    this._toastSavingService.hideSaved();
+  }
+
+  protected hideError(): void {
+    this._toastSavingService.hideError();
   }
 
   public ngOnInit(): void {

@@ -7,8 +7,8 @@ import {
   Validators,
 } from "@angular/forms";
 import { ProfileService } from "@modules/profile/services/profile.service";
-import { Subject } from "rxjs";
 import { Sex } from "@modules/profile/models/profile";
+import { ToastSavingService } from "@core/services/toast-saving.service";
 
 @Component({
   selector: "app-personal-information",
@@ -22,13 +22,12 @@ export class PersonalInformationPage {
     email: FormControl<string>;
     sex: FormControl<Sex>;
   }>;
-  protected readonly saved$ = new Subject<boolean>();
-  protected readonly error$ = new Subject<boolean>();
 
-  constructor(
+  public constructor(
     private _formBuilder: FormBuilder,
     private _profileService: ProfileService,
-    private _loadingService: LoadingService
+    private _loadingService: LoadingService,
+    private _toastSavingService: ToastSavingService
   ) {
     this.form = this._formBuilder.nonNullable.group({
       firstName: ["", Validators.required],
@@ -45,15 +44,15 @@ export class PersonalInformationPage {
       .subscribe(profile => this.form.patchValue(profile));
   }
 
-  saveChanges() {
+  public saveChanges(): void {
     if (this.form.invalid) return;
 
     this._loadingService.showLoading();
     this._profileService
       .updateProfile(this.form.getRawValue())
       .subscribe({
-        next: () => this.saved$.next(true),
-        error: () => this.error$.next(true),
+        next: () => this._toastSavingService.showSaved(),
+        error: () => this._toastSavingService.showError(),
       })
       .add(() => this._loadingService.hideLoading());
   }

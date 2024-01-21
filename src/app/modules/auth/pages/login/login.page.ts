@@ -7,8 +7,8 @@ import {
 } from "@angular/forms";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
-import { Subject } from "rxjs";
 import { LoadingService } from "@core/services/loading.service";
+import { ToastSavingService } from "@core/services/toast-saving.service";
 
 @Component({
   selector: "app-login",
@@ -21,14 +21,14 @@ export class LoginPage {
     email: FormControl<string>;
     password: FormControl<string>;
   }>;
-  protected wrongCredentials$ = new Subject<boolean>();
   protected showPassword = false;
 
   public constructor(
     private _formBuilder: FormBuilder,
     private _authService: AuthService,
     private _router: Router,
-    private _loadingService: LoadingService
+    private _loadingService: LoadingService,
+    private _toastSavingService: ToastSavingService
   ) {
     this.form = this._formBuilder.nonNullable.group({
       email: ["", [Validators.required, Validators.email]],
@@ -45,7 +45,8 @@ export class LoginPage {
       .subscribe({
         next: () =>
           this._router.navigateByUrl("/tabs").then(() => this.form.reset()),
-        error: () => this.wrongCredentials$.next(true),
+        error: () =>
+          this._toastSavingService.showErrorWithMessage("Wrong credentials."),
       })
       .add(() => this._loadingService.hideLoading());
   }

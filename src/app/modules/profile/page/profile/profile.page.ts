@@ -7,8 +7,8 @@ import { Router } from "@angular/router";
 
 @Component({
   selector: "app-profile",
-  templateUrl: "profile-page.component.html",
-  styleUrls: ["profile-page.component.scss"],
+  templateUrl: "profile.page.html",
+  styleUrls: ["profile.page.scss"],
 })
 export class ProfilePage {
   protected profile$: Observable<Profile> = EMPTY;
@@ -19,11 +19,11 @@ export class ProfilePage {
     private _router: Router
   ) {}
 
-  ionViewWillEnter() {
+  public ionViewWillEnter(): void {
     this.profile$ = this._profileService.getProfile();
   }
 
-  protected async logout() {
+  protected async logout(): Promise<void> {
     this._authService
       .logout()
       .subscribe()

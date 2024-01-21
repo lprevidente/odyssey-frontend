@@ -156,12 +156,4 @@
       You don't have an account? Sign up!
     </ion-button>
   </ion-buttons>
-
-  <ion-toast
-    [isOpen]="(wrongCredentials$ | async) === true"
-    color="danger"
-    message="Wrong credentials!"
-    (didDismiss)="wrongCredentials$.next(false)"
-    [duration]="5000">
-  </ion-toast>
 </ion-content>

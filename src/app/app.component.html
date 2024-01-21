@@ -7,3 +7,19 @@
   [duration]="3000"
   message="Please wait...">
 </ion-loading>
+
+<ion-toast
+  [isOpen]="(saved$ | async) === true"
+  (didDismiss)="hideSaved()"
+  color="success"
+  message="Changes saved successfully!"
+  [duration]="3000">
+</ion-toast>
+
+<ion-toast
+  [isOpen]="(error$ | async) !== ''"
+  (didDismiss)="hideError()"
+  color="danger"
+  [message]="error$ | async"
+  [duration]="3000">
+</ion-toast>
