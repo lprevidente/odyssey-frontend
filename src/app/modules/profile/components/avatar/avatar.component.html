@@ -2,11 +2,11 @@
   [style.width]="size"
   [style.height]="size"
   class="avatar-container ion-activatable"
-  (click)="changeAvatar()">
+  (click)="openActionSheet()">
   <ion-ripple-effect></ion-ripple-effect>
   <img
-    [src]="imageUrl"
-    [alt]="altText"
+    [src]="profilePictureUrl$ | async"
+    alt="avatar"
     class="avatar-image" />
   <input
     type="file"
@@ -19,3 +19,10 @@
     class="edit-icon">
   </ion-icon>
 </div>
+
+<ion-action-sheet
+  [isOpen]="(openActions$ | async) === true"
+  (didDismiss)="actionResult($event)"
+  header="Actions"
+  [buttons]="actionSheetButtons">
+</ion-action-sheet>

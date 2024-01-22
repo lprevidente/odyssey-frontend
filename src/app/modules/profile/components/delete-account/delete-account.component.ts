@@ -44,7 +44,7 @@ export class DeleteAccountComponent {
       .subscribe();
   }
 
-  protected actionResult(event: any): void {
-    if (event.role === "destructive") this.deleteProfile();
+  protected actionResult(event: CustomEvent): void {
+    if (event.detail.role === "destructive") this.deleteProfile();
   }
 }

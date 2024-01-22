@@ -13,25 +13,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="profile-container">
-    <div
-      class="profile-info"
-      *ngIf="profile$ | async as profile">
-      <app-avatar
-        size="60px"
-        imageUrl="https://www.w3schools.com/howto/img_avatar{{
-          profile.sex === 'F' ? '2' : ''
-        }}.png"
-        altText="Alt Text">
-      </app-avatar>
-      <ion-text>
-        <p class="full-name">
-          {{ profile.firstName + " " + profile.lastName }}
-        </p>
-        <p class="see-profile">{{ profile.email }}</p>
-      </ion-text>
-    </div>
-  </div>
+  <app-profile-info></app-profile-info>
 
   <ion-list>
     <ion-list-header>

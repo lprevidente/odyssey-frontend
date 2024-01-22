@@ -12,6 +12,7 @@ import { LastUpdatePasswordComponent } from "@modules/profile/components/last-up
 import { DeviceHistoryComponent } from "@modules/profile/components/device-history/device-history.component";
 import { DeleteAccountComponent } from "@modules/profile/components/delete-account/delete-account.component";
 import { AppSettingsPage } from "@modules/profile/pages/app-settings/app-settings.page";
+import { ProfileInfoComponent } from "@modules/profile/components/profile-info/profile-info.component";
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { AppSettingsPage } from "@modules/profile/pages/app-settings/app-setting
     NotificationsPage,
     LastUpdatePasswordComponent,
     DeleteAccountComponent,
+    ProfileInfoComponent,
   ],
 })
 export class ProfilePageModule {}

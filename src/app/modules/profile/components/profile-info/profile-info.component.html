@@ -1,0 +1,14 @@
+<div class="profile-container">
+  <div class="profile-info">
+    <app-avatar
+      size="60px"
+      [profile$]="profile$">
+    </app-avatar>
+    <ion-text *ngIf="profile$ | async as profile">
+      <p class="full-name">
+        {{ profile.firstName + " " + profile.lastName }}
+      </p>
+      <p class="see-profile">{{ profile.email }}</p>
+    </ion-text>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { AppSettingsService } from "@modules/profile/services/app-settings.service";
 import { LoadingService } from "@core/services/loading.service";
@@ -8,6 +8,7 @@ import { ToastSavingService } from "@core/services/toast-saving.service";
   selector: "app-app-settings",
   templateUrl: "./app-settings.page.html",
   styleUrls: ["./app-settings.page.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppSettingsPage {
   protected readonly form: FormGroup;
