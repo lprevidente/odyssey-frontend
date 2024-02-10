@@ -6,8 +6,6 @@ import { MeService } from "@core/services/me.service";
   providedIn: "root",
 })
 export class AuthGuardService {
-  private readonly _url = "/auth/login";
-
   public constructor(
     private _meService: MeService,
     private _router: Router

@@ -31,5 +31,6 @@ export class TokenStorageService {
 
   public clear(): void {
     window.localStorage.removeItem(TOKEN);
+    window.localStorage.removeItem(REFRESH_TOKEN);
   }
 }

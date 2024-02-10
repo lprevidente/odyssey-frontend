@@ -24,21 +24,6 @@ export class AvatarComponent implements OnInit {
 
   @ViewChild("fileInput") private _fileInput!: ElementRef;
 
-  public actionSheetButtons = [
-    {
-      text: "Delete",
-      role: "destructive",
-    },
-    {
-      text: "Upload",
-      role: "upload",
-    },
-    {
-      text: "Cancel",
-      role: "cancel",
-    },
-  ];
-
   protected readonly openActions$ = new Subject<boolean>();
   protected readonly profilePictureUrl$ = new Subject<string>();
   private _profile: Profile = {} as Profile;
@@ -47,6 +32,15 @@ export class AvatarComponent implements OnInit {
     private _avatarService: AvatarService,
     private _toastSavingService: ToastSavingService
   ) {}
+
+  protected get actionSheetButtons(): { text: string; role: string }[] {
+    const base = [
+      { text: "Upload", role: "upload" },
+      { text: "Cancel", role: "cancel" },
+    ];
+    if (!this._profile.avatarURL) return base;
+    return [{ text: "Delete", role: "destructive" }, ...base];
+  }
 
   protected openActionSheet(): void {
     this.openActions$.next(true);

@@ -14,9 +14,9 @@ import { switchMap } from "rxjs";
 import { MeService } from "@core/services/me.service";
 
 @Component({
-  selector: "app-signup",
-  templateUrl: "./verification-page.component.html",
-  styleUrls: ["./verification-page.component.scss"],
+  selector: "app-verification",
+  templateUrl: "./verification.page.html",
+  styleUrls: ["./verification.page.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerificationPage {
