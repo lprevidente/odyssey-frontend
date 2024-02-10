@@ -5,55 +5,63 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
-import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
 import { LoadingService } from "@core/services/loading.service";
 import { ToastSavingService } from "@core/services/toast-saving.service";
-import { MeService } from "@core/services/me.service";
+import { VerificationService } from "@modules/auth/services/verification.service";
 import { switchMap } from "rxjs";
+import { MeService } from "@core/services/me.service";
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.page.html",
-  styleUrls: ["./login.page.scss"],
+  selector: "app-signup",
+  templateUrl: "./verification-page.component.html",
+  styleUrls: ["./verification-page.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginPage {
+export class VerificationPage {
   protected readonly form: FormGroup<{
-    email: FormControl<string>;
-    password: FormControl<string>;
+    code: FormControl<string>;
   }>;
-  protected showPassword = false;
 
   public constructor(
     private _formBuilder: FormBuilder,
-    private _authService: AuthService,
     private _meService: MeService,
+    private _verificationService: VerificationService,
     private _router: Router,
     private _loadingService: LoadingService,
     private _toastSavingService: ToastSavingService
   ) {
     this.form = this._formBuilder.nonNullable.group({
-      email: ["", [Validators.required, Validators.email]],
-      password: ["", Validators.required],
+      code: ["", Validators.pattern(/^[0-9]{6}$/)],
     });
+    this._verificationService.getConfirmationEmail().subscribe();
   }
 
-  protected login(): void {
-    if (this.form.invalid) return;
+  protected submit(): void {
+    if (this.form.invalid) {
+      return;
+    }
 
     this._loadingService.showLoading();
-    this._authService
-      .login(this.form.getRawValue())
+    this._verificationService
+      .verifyIdentity(this.form.getRawValue())
       .subscribe({
         next: () =>
           this._meService
             .getMe()
             .pipe(switchMap(() => this._router.navigateByUrl("/tabs")))
             .subscribe(() => this.form.reset()),
-        error: () =>
-          this._toastSavingService.showErrorWithMessage("Wrong credentials."),
+        error: (error: HttpErrorResponse) => this._handleError(error),
       })
       .add(() => this._loadingService.hideLoading());
+  }
+
+  private _handleError(error: HttpErrorResponse): void {
+    if (error.error.title === "confirmation_code_not_valid")
+      this._toastSavingService.showErrorWithMessage(
+        "The code is not valid. Please try again."
+      );
+    else this._toastSavingService.showError();
   }
 }

@@ -1,4 +1,9 @@
-import { InjectionToken, isDevMode, NgModule } from "@angular/core";
+import {
+  APP_INITIALIZER,
+  InjectionToken,
+  isDevMode,
+  NgModule,
+} from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouteReuseStrategy } from "@angular/router";
 
@@ -11,8 +16,14 @@ import { environment } from "../environments/environment";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AuthInterceptor } from "@core/interceptors/auth.interceptor";
 import { RefreshTokenInterceptor } from "@core/interceptors/refresh-token.interceptor";
+import { MeService } from "@core/services/me.service";
+import { Observable } from "rxjs";
 
 export const BASE_PATH = new InjectionToken<string>("Base path for the API");
+
+export function initApp(meService: MeService) {
+  return (): Observable<void> => meService.getMe();
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +48,12 @@ export const BASE_PATH = new InjectionToken<string>("Base path for the API");
     {
       provide: BASE_PATH,
       useValue: environment.basePath,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      deps: [MeService],
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],

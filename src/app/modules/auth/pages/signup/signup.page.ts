@@ -26,6 +26,7 @@ export class SignupPage {
     firstName: FormControl<string>;
     lastName: FormControl<string>;
     email: FormControl<string>;
+    sex: FormControl<string>;
     password: FormControl<string>;
     confirmPassword: FormControl<string>;
   }>;
@@ -43,6 +44,7 @@ export class SignupPage {
         firstName: ["", Validators.required],
         lastName: ["", Validators.required],
         email: ["", [Validators.required, Validators.email]],
+        sex: ["M", Validators.required],
         password: [
           "",
           [Validators.required, Validators.pattern(passwordRegEx)],
@@ -64,22 +66,16 @@ export class SignupPage {
 
     this._loadingService.showLoading();
     this._authService
-      .signup({
-        ...this.form.getRawValue(),
-        appSettings: {
-          language: "en-US",
-          currency: "EUR",
-        },
-      })
+      .signup(this.form.getRawValue())
       .subscribe({
         next: () => {
           this.form.reset();
-          this._router.navigateByUrl("/tabs");
+          this._router.navigateByUrl("/auth/verification");
         },
         error: (error: HttpErrorResponse) => {
           if (error.error.title === "email_already_exist")
             this._toastSavingService.showErrorWithMessage(
-              "Email already exists."
+              "Already registered with this email."
             );
           else this._toastSavingService.showError();
         },

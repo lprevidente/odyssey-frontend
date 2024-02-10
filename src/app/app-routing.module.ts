@@ -1,7 +1,8 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
-import { canActivateAuthGuard } from "@core/guards/auth-guard.service";
+import { isAuthenticatedGuard } from "@core/guards/auth-guard.service";
 import { canActivateNoAuthGuard } from "@core/guards/no-auth-guard.service";
+import { isVerifiedGuard } from "@core/guards/verification-guard.service";
 
 const routes: Routes = [
   {
@@ -11,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: "tabs",
-    canActivate: [canActivateAuthGuard],
+    canActivate: [isAuthenticatedGuard, isVerifiedGuard],
     loadChildren: () =>
       import("@modules/tabs/tabs.module").then(m => m.TabsPageModule),
   },

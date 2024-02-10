@@ -3,8 +3,5 @@ export interface Signup {
   password: string;
   firstName: string;
   lastName: string;
-  appSettings: {
-    language: string;
-    currency: "EUR" | "USD";
-  };
+  sex: string;
 }

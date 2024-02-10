@@ -28,7 +28,7 @@ export class AuthGuardService {
   }
 }
 
-export const canActivateAuthGuard: CanActivateFn = (
+export const isAuthenticatedGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ) => inject(AuthGuardService).canActivate(state);

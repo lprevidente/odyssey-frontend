@@ -29,6 +29,7 @@
       labelPlacement="stacked"
       fill="outline">
     </ion-input>
+
     <ion-input
       mode="md"
       type="text"
@@ -37,6 +38,7 @@
       labelPlacement="stacked"
       fill="outline">
     </ion-input>
+
     <ion-input
       mode="md"
       type="email"
@@ -45,6 +47,17 @@
       labelPlacement="stacked"
       fill="outline">
     </ion-input>
+
+    <ion-select
+      mode="md"
+      fill="outline"
+      labelPlacement="stacked"
+      label="Sex"
+      formControlName="sex">
+      <ion-select-option value="M">Male</ion-select-option>
+      <ion-select-option value="F">Female</ion-select-option>
+      <ion-select-option value="O">Other</ion-select-option>
+    </ion-select>
 
     <ion-input
       [type]="showPassword ? 'text' : 'password'"

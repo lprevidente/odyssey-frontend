@@ -10,12 +10,12 @@ import { TokenStorageService } from "@core/services/token-storage.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private _tokenStorageService: TokenStorageService) {}
+  public constructor(private _tokenStorageService: TokenStorageService) {}
 
-  intercept(
-    req: HttpRequest<any>,
+  public intercept(
+    req: HttpRequest<unknown>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<unknown>> {
     const token = this._tokenStorageService.token;
     if (token) {
       const cloned = req.clone({
