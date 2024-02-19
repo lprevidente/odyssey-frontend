@@ -6,7 +6,7 @@ import { Component } from "@angular/core";
   styleUrls: ["all-trips.page.scss"],
 })
 export class AllTripsPage {
-  constructor() {
+  public constructor() {
     console.log("AllTripsPage.constructor");
   }
 }

@@ -1,0 +1,108 @@
+.title-large {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.group-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .card {
+    border-radius: 16px;
+    padding: 16px 20px;
+    background-color: var(--card-backgroud);
+    box-shadow:
+      0 1px 2px var(--card-shadow-dark),
+      0 4px 6px var(--card-shadow-light);
+    cursor: pointer;
+
+    .content {
+      ion-item {
+        --background: trasparent;
+      }
+
+      .title {
+        margin: 10px 0;
+        font-weight: 700;
+        font-size: 26px;
+      }
+
+      ion-list {
+        border-radius: 10px;
+      }
+
+      ion-range-calendar {
+        padding: unset !important;
+        background-color: unset !important;
+      }
+
+      .actions {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+      }
+    }
+
+    .placeholder {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .title {
+        font-weight: 400;
+        color: var(--ion-color-light-contrast);
+      }
+
+      .subtitle {
+        font-weight: 600;
+        color: var(--ion-color-dark);
+      }
+    }
+  }
+}
+
+::ng-deep ion-range-calendar {
+  .title {
+    ion-button {
+      color: var(--ion-color-dark) !important;
+    }
+
+    .back,
+    .forward {
+      margin-top: 10px !important;
+    }
+  }
+
+  .days-btn {
+    &:not([disabled]) {
+      p {
+        color: var(--ion-color-dark) !important;
+      }
+    }
+
+    &:disabled {
+      p {
+        color: unset !important;
+      }
+    }
+  }
+}
+
+.autocomplete {
+  position: relative;
+
+  ion-list {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+
+    ion-item {
+      ion-icon {
+        margin-right: 10px;
+      }
+    }
+  }
+}

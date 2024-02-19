@@ -16,6 +16,9 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    if (req.url.includes("https://autocomplete.search.hereapi.com"))
+      return next.handle(req);
+
     const token = this._tokenStorageService.token;
     if (token) {
       const cloned = req.clone({
