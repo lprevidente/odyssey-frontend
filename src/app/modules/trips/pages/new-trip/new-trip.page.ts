@@ -1,9 +1,15 @@
 import { ChangeDetectionStrategy, Component, signal } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { AddressService } from "@modules/trips/services/address.service";
-import { Place, trackPlaceBy } from "@modules/trips/models/here";
+import { Place, trackPlaceBy } from "@modules/trips/models/address";
 import { CalendarComponentOptions } from "@googlproxer/ion-range-calendar";
 import { format } from "date-fns";
+import { map, switchMap } from "rxjs";
+import { TripService } from "@modules/trips/services/trip.service";
+import { NewTrip } from "@modules/trips/models/new-trip";
+import { LoadingService } from "@core/services/loading.service";
+import { ToastSavingService } from "@core/services/toast-saving.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-new-trip",
@@ -13,16 +19,20 @@ import { format } from "date-fns";
 })
 export class NewTripPage {
   protected readonly form = this._formBuilder.group({
-    name: ["", Validators.required],
-    range: new FormControl<{
+    name: new FormControl<string>("", {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    dateRange: new FormControl<{
       from: Date;
       to: Date;
     } | null>(null, Validators.required),
-    guests: this._formBuilder.nonNullable.group({
+    people: this._formBuilder.nonNullable.group({
       adults: [0, [Validators.required, Validators.min(1)]],
       children: [0, Validators.required],
     }),
   });
+
   protected readonly trackBy = trackPlaceBy;
   protected readonly places = signal<Place[]>([]);
 
@@ -40,7 +50,11 @@ export class NewTripPage {
 
   public constructor(
     private _formBuilder: FormBuilder,
-    private _addressService: AddressService
+    private _addressService: AddressService,
+    private _tripService: TripService,
+    private _loadingService: LoadingService,
+    private _router: Router,
+    private _toastSavingService: ToastSavingService
   ) {}
 
   protected setShowWhere(): void {
@@ -86,7 +100,7 @@ export class NewTripPage {
   }
 
   protected rangeSelected(): void {
-    const { from, to } = this.form.getRawValue().range!;
+    const { from, to } = this.form.getRawValue().dateRange!;
     const fromStr = format(from, "MMM dd");
     const toStr = format(to, "MMM dd");
     this.range.set(`${fromStr} - ${toStr}`);
@@ -95,7 +109,31 @@ export class NewTripPage {
 
   protected peopleSelected(): void {
     this.showWho.set(false);
-    const { adults, children } = this.form.getRawValue().guests;
+    const { adults, children } = this.form.getRawValue().people;
     this.guests.set(adults + children);
+  }
+
+  protected createTrip(): void {
+    if (this.form.invalid) {
+      console.info("Form is invalid", this.form.errors);
+      return;
+    }
+
+    this._loadingService.showLoading();
+    const trip = this.form.getRawValue() as NewTrip;
+    this._addressService
+      .getPosition(this.place()!.id)
+      .pipe(
+        map(place => ({ ...trip, place })),
+        switchMap(trip => this._tripService.createTrip(trip))
+      )
+      .subscribe({
+        next: trip => {
+          this._router.navigateByUrl(`/tabs/trips/${trip.id}`);
+          this._toastSavingService.showSaved();
+        },
+        error: () => this._toastSavingService.showError(),
+      })
+      .add(() => this._loadingService.hideLoading());
   }
 }

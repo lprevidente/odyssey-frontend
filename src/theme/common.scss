@@ -30,3 +30,9 @@
 .w-100 {
   width: 100%;
 }
+
+.overflow-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

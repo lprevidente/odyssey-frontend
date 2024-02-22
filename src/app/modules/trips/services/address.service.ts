@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Response } from "@modules/trips/models/here";
+import { Place, Response } from "@modules/trips/models/address";
 import { BASE_PATH } from "../../../app.module";
 
 @Injectable({ providedIn: "root" })
@@ -19,5 +19,10 @@ export class AddressService {
     return this._httpClient.get<Response>(`${this._endpoint}/autocomplete`, {
       params: { query },
     });
+  }
+
+  public getPosition(id: string): Observable<Place> {
+    const options = { params: { id } };
+    return this._httpClient.get<Place>(`${this._endpoint}/position`, options);
   }
 }

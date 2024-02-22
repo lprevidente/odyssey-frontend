@@ -13,11 +13,16 @@ export interface Address {
 }
 
 export interface Place {
-  title: string;
   id: string;
-  language: string;
+  title: string;
   resultType: string;
   address: Address;
+  position?: Position;
+}
+
+export interface Position {
+  lat: number;
+  lng: number;
 }
 
 export const trackPlaceBy = (_: number, item: Place): string => item.id;

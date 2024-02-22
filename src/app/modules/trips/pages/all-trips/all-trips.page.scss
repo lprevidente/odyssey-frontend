@@ -25,11 +25,24 @@
   flex-direction: column;
   overflow: auto;
 
+  .empty {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   ion-card {
     height: 150px;
+    position: relative;
 
-    img {
+    .thumbnail {
       filter: brightness(60%);
+      max-width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     .name,
@@ -57,6 +70,8 @@
 
     .date {
       font-weight: 200;
+      top: 0;
+      left: 0;
     }
 
     .price {

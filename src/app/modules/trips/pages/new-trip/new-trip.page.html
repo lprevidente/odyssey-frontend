@@ -49,7 +49,7 @@
               @for (place of places(); track trackBy) {
               <ion-item (click)="selectPlace(place)">
                 <ion-icon name="navigate-circle-outline"></ion-icon>
-                <ion-label>{{ place.title }}</ion-label>
+                <ion-label class="overflow-text">{{ place.title }}</ion-label>
               </ion-item>
               }
             </ion-list>
@@ -71,7 +71,7 @@
         <div class="content">
           <p class="title">When's your trip?</p>
           <ion-range-calendar
-            formControlName="range"
+            formControlName="dateRange"
             type="js-date"
             [options]="optionsRange"
             [format]="'yyyy-MM-dd'">
@@ -109,7 +109,7 @@
         <div class="content">
           <p class="title">Who's coming?</p>
 
-          <ng-container formGroupName="guests">
+          <ng-container formGroupName="people">
             <ion-item>
               <ion-label>
                 <h3>Adults</h3>
@@ -158,6 +158,7 @@
 
     <ion-button
       type="submit"
+      (click)="createTrip()"
       [disabled]="form.invalid"
       expand="block"
       class="mt-1"

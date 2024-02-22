@@ -58,6 +58,10 @@
       .subtitle {
         font-weight: 600;
         color: var(--ion-color-dark);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
       }
     }
   }
