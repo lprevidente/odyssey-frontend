@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  basePath: "http://192.168.1.234:9000",
 };
