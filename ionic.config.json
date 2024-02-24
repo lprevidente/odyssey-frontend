@@ -1,7 +1,0 @@
-{
-  "name": "Odyssey",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
