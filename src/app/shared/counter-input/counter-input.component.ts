@@ -33,9 +33,7 @@ export class CounterInputComponent implements ControlValueAccessor {
   }
 
   public writeValue(value: number): void {
-    if (value) {
-      this.counterValue = value;
-    }
+    if (value) this.counterValue = value;
   }
 
   public registerOnChange(fn: () => void): void {

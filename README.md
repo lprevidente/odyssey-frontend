@@ -1,4 +1,4 @@
-# Odyssey Frontend
+# Odyssey Frontend [![Build And Push on GitHub Pages](https://github.com/lprevidente/odyssey-frontend/actions/workflows/build-deploy.yml/badge.svg)](https://github.com/lprevidente/odyssey-frontend/actions/workflows/build-deploy.yml)
 
 This project is a web application for the Odyssey application, developed using Angular, TypeScript, and JavaScript. It uses npm as a package manager.
 

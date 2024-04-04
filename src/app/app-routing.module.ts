@@ -11,6 +11,11 @@ const routes: Routes = [
     pathMatch: "full",
   },
   {
+    path: "error",
+    loadChildren: () =>
+      import("./modules/error/error.module").then(m => m.ErrorPageModule),
+  },
+  {
     path: "tabs",
     canActivate: [isAuthenticatedGuard, isVerifiedGuard],
     loadChildren: () =>
@@ -25,6 +30,11 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: "tabs",
+  },
+  {
+    path: "error",
+    loadChildren: () =>
+      import("./modules/error/error.module").then(m => m.ErrorPageModule),
   },
 ];
 

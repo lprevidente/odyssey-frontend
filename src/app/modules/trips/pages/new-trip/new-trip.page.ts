@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
-import { AddressService } from "@modules/trips/services/address.service";
-import { Place, trackPlaceBy } from "@modules/trips/models/address";
+import { AddressService } from "@shared/address/service/address.service";
+import { Place } from "@modules/trips/models/address";
 import { CalendarComponentOptions } from "@googlproxer/ion-range-calendar";
 import { format } from "date-fns";
 import { map, switchMap } from "rxjs";
@@ -32,9 +32,6 @@ export class NewTripPage {
       children: [0, Validators.required],
     }),
   });
-
-  protected readonly trackBy = trackPlaceBy;
-  protected readonly places = signal<Place[]>([]);
 
   protected readonly showWhere = signal<boolean>(false);
   protected readonly showWhen = signal<boolean>(false);
@@ -75,26 +72,9 @@ export class NewTripPage {
     this.showWho.set(true);
   }
 
-  protected autocomplete(event: any): void {
-    const text = event.target.value?.toLowerCase();
-    if (!text) {
-      this.clearSearch();
-      return;
-    }
-    this._addressService.autocomplete(text).subscribe({
-      next: ({ items }) => this.places.set(items),
-      error: console.error,
-    });
-  }
-
-  protected clearSearch(): void {
-    this.places.set([]);
-  }
-
   protected selectPlace(place: Place): void {
     this.form.patchValue({ name: place.address.city ?? place.address.label });
     this.place.set(place);
-    this.places.set([]);
     this.showWhere.set(false);
     this.showWhen.set(true);
   }

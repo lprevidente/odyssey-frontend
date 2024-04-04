@@ -27,6 +27,10 @@
 
 @import "theme/common";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .form {
   ion-select,
   ion-input {

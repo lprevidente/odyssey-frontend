@@ -25,4 +25,10 @@ export class AddressService {
     const options = { params: { id } };
     return this._httpClient.get<Place>(`${this._endpoint}/position`, options);
   }
+
+  public getPOI(query: string, at: string): Observable<Response> {
+    return this._httpClient.get<Response>(`${this._endpoint}/poi`, {
+      params: { query, at },
+    });
+  }
 }

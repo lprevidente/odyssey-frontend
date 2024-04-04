@@ -33,27 +33,10 @@
         @if (showWhere()) {
         <div class="content">
           <p class="title">Where to?</p>
-          <div class="autocomplete">
-            <ion-input
-              mode="md"
-              type="text"
-              label="Search destination"
-              labelPlacement="stacked"
-              fill="outline"
-              [clearInput]="true"
-              [debounce]="100"
-              (ionInput)="autocomplete($event)">
-            </ion-input>
-
-            <ion-list>
-              @for (place of places(); track trackBy) {
-              <ion-item (click)="selectPlace(place)">
-                <ion-icon name="navigate-circle-outline"></ion-icon>
-                <ion-label class="overflow-text">{{ place.title }}</ion-label>
-              </ion-item>
-              }
-            </ion-list>
-          </div>
+          <app-place-autocomplete
+            [value]="place()"
+            (selected)="selectPlace($event)">
+          </app-place-autocomplete>
         </div>
         } @else {
         <div

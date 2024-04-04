@@ -1,0 +1,16 @@
+.autocomplete {
+  position: relative;
+
+  ion-list {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+
+    ion-item {
+      ion-icon {
+        margin-right: 10px;
+      }
+    }
+  }
+}

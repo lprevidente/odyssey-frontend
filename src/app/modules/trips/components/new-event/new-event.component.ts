@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 
 @Component({
   selector: "app-new-event",
@@ -6,30 +6,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
   styleUrls: ["./new-event.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewEventComponent implements OnInit {
+export class NewEventComponent {
   protected isModalOpen = false;
-  // Typically referenced to your ion-router-outlet
-  protected presentingElement: HTMLElement | null = null;
 
-  constructor() {}
-
-  ngOnInit() {
-    this.presentingElement = document.querySelector(".ion-pages");
-  }
-
-  onWillDismiss($event: any) {
-    this.isModalOpen = false;
-  }
-
-  cancel() {
-    this.isModalOpen = false;
-  }
-
-  confirm() {
-    this.isModalOpen = false;
-  }
-
-  openModel() {
-    this.isModalOpen = true;
-  }
+  public constructor() {}
 }

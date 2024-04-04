@@ -1,0 +1,34 @@
+<ion-backdrop
+  *ngIf="places().length > 0"
+  (ionBackdropTap)="clearSearch()"
+  [visible]="true">
+</ion-backdrop>
+
+<div class="autocomplete">
+  <ion-input
+    mode="md"
+    type="text"
+    [label]="label()"
+    labelPlacement="stacked"
+    fill="outline"
+    [value]="value()?.title"
+    [clearInput]="true"
+    [debounce]="100"
+    [clearOnEdit]="false"
+    (ionInput)="autocomplete($event)">
+  </ion-input>
+
+  <ion-list>
+    @for (place of places(); track trackBy) {
+      <ion-item (click)="selectPlace(place)">
+        <ion-icon name="navigate-circle-outline"></ion-icon>
+        <ion-label class="overflow-text">
+          <span class="text-sm">{{ place.address.label.split(",")[0] }},</span>
+          <span class="text-gray-400 text-sm">
+            {{ place.address.label.split(",")[1] }}
+          </span>
+        </ion-label>
+      </ion-item>
+    }
+  </ion-list>
+</div>
