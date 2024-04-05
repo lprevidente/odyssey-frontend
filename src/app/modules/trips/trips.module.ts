@@ -12,6 +12,7 @@ import { IonRangeCalendarModule } from "@googlproxer/ion-range-calendar";
 import { CounterInputComponent } from "@shared/counter-input/counter-input.component";
 import { AdressModule } from "@shared/address/adress.module";
 import { NewEventTransportationComponent } from "@modules/trips/components/new-event-transportation/new-event-transportation.component";
+import { NewEventEateryComponent } from "@modules/trips/components/new-event-eatery/new-event-eatery.component";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NewEventTransportationComponent } from "@modules/trips/components/new-e
     NewEventComponent,
     NewTripPage,
     NewEventTransportationComponent,
+    NewEventEateryComponent,
   ],
   imports: [
     IonicModule,

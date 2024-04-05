@@ -6,7 +6,7 @@
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start"></ion-buttons>
-        <ion-title>Add a place to go</ion-title>
+        <ion-title>Plan Your Path</ion-title>
 
         <!-- Close button -->
         <ion-buttons slot="end">
@@ -21,7 +21,7 @@
 
     <ion-content class="ion-padding">
       <p class="text-gray-500 dark:text-gray-400">
-        Enter your trip details below
+        Input Transportation Routes for Your Travel Planner
       </p>
 
       <form
@@ -37,7 +37,7 @@
           labelPlacement="stacked"
           type="text"
           formControlName="name"
-          placeholder="Add a label">
+          placeholder="Flight to Rome">
         </ion-input>
 
         <!-- Means of transport -->
@@ -67,16 +67,16 @@
         <app-poi-autocomplete
           label="From"
           formControlName="from"
-          [latitude]="52.5308"
-          [longitude]="13.3847">
+          [latitude]="52.36994"
+          [longitude]="4.90788">
         </app-poi-autocomplete>
 
         <!-- To -->
         <app-poi-autocomplete
           label="To"
           formControlName="to"
-          [latitude]="52.5308"
-          [longitude]="13.3847">
+          [latitude]="52.36994"
+          [longitude]="4.90788">
         </app-poi-autocomplete>
 
         <div class="grid grid-cols-2 items-center gap-4">
@@ -131,7 +131,7 @@
           label="Add a note"
           formControlName="description"
           fill="outline"
-          placeholder="Add a note">
+          placeholder="Don't forget to bring the sunscreen">
         </ion-textarea>
 
         <div class="mt-4">

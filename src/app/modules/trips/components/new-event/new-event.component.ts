@@ -7,7 +7,10 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewEventComponent {
-  protected isModalOpen = false;
+  protected isTransportationOpen = false;
+  protected isEateryOpen = false;
+  protected isAccommodationOpen = false;
+  protected isEntertainmentOpen = false;
 
   public constructor() {}
 }
