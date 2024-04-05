@@ -15,6 +15,8 @@ import { NewEventTransportationComponent } from "@modules/trips/components/new-e
 import { NewEventEateryComponent } from "@modules/trips/components/new-event-eatery/new-event-eatery.component";
 import { NewEventAccommodationComponent } from "@modules/trips/components/new-event-accomodation/new-event-accommodation.component";
 import { NewEventEntertainmentComponent } from "@modules/trips/components/new-event-entertainment/new-event-entertainment.component";
+import { EditGuestsComponent } from "@modules/trips/components/edit-guests/edit-guests.component";
+import { EditDateRangeComponent } from "@modules/trips/components/edit-date-range/edit-date-range.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { NewEventEntertainmentComponent } from "@modules/trips/components/new-ev
     NewEventEateryComponent,
     NewEventAccommodationComponent,
     NewEventEntertainmentComponent,
+    EditGuestsComponent,
+    EditDateRangeComponent,
   ],
   imports: [
     IonicModule,

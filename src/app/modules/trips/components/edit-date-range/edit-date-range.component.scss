@@ -1,0 +1,26 @@
+::ng-deep ion-range-calendar {
+  background-color: unset !important;
+
+  .title {
+    ion-button {
+      color: var(--ion-color-dark) !important;
+    }
+
+    .back,
+    .forward {
+      margin-top: 10px !important;
+    }
+  }
+
+  .days-btn:not([disabled]) {
+    p {
+      color: var(--ion-color-dark) !important;
+    }
+  }
+
+  .days-btn:disabled {
+    p {
+      color: var(--ion-color-light-tint) !important;
+    }
+  }
+}

@@ -19,12 +19,12 @@
     <ion-toolbar>
       <ion-title size="large">Amsterdam</ion-title>
 
-      <ion-chip>
+      <ion-chip (click)="isEditRangeOpen = true">
         <ion-icon name="calendar-outline"></ion-icon>
         <ion-label>21-27 Jul</ion-label>
       </ion-chip>
 
-      <ion-chip>
+      <ion-chip (click)="isEditGuestsOpen = true">
         <ion-icon name="people-outline"></ion-icon>
         <ion-label>1 guest</ion-label>
       </ion-chip>
@@ -40,3 +40,6 @@
     <span>Delete Trip</span>
   </ion-button>
 </ion-content>
+
+<app-edit-date-range [(openModel)]="isEditRangeOpen"></app-edit-date-range>
+<app-edit-guests [(openModel)]="isEditGuestsOpen"></app-edit-guests>

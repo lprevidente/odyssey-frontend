@@ -79,17 +79,15 @@
     }
   }
 
-  .days-btn {
-    &:not([disabled]) {
-      p {
-        color: var(--ion-color-dark) !important;
-      }
+  .days-btn:not([disabled]) {
+    p {
+      color: var(--ion-color-dark) !important;
     }
+  }
 
-    &:disabled {
-      p {
-        color: unset !important;
-      }
+  .days-btn:disabled {
+    p {
+      color: var(--ion-color-light-tint) !important;
     }
   }
 }
