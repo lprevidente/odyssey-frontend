@@ -20,10 +20,12 @@ export class NewEventTransportationComponent implements OnInit {
   protected presentingElement: globalThis.Element | null = null;
   protected form = this._formBuilder.group({
     name: [null, Validators.required],
-    description: [null],
+    note: [null],
     means: ["bus", Validators.required],
     from: [null, Validators.required],
     to: [null, Validators.required],
+    departureTime: [null],
+    arrivalTime: [null],
   });
 
   protected readonly transportationMeans = [

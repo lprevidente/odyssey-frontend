@@ -94,6 +94,7 @@
             <ion-modal [keepContentsMounted]="true">
               <ng-template>
                 <ion-datetime
+                  formControlName="departureTime"
                   presentation="time"
                   id="fromTime">
                 </ion-datetime>
@@ -114,6 +115,7 @@
             <ion-modal [keepContentsMounted]="true">
               <ng-template>
                 <ion-datetime
+                  formControlName="arrivalTime"
                   presentation="time"
                   id="toTime">
                 </ion-datetime>
@@ -129,7 +131,7 @@
           mode="md"
           labelPlacement="stacked"
           label="Add a note"
-          formControlName="description"
+          formControlName="note"
           fill="outline"
           placeholder="Don't forget to bring the sunscreen">
         </ion-textarea>

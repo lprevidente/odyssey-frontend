@@ -84,7 +84,7 @@
           mode="md"
           labelPlacement="stacked"
           label="Add a note"
-          formControlName="description"
+          formControlName="note"
           fill="outline"
           placeholder="It has some vegetarian dishies">
         </ion-textarea>
@@ -98,6 +98,11 @@
           type="text"
           formControlName="link"
           placeholder="https://odysseyrestaurant.com">
+          <ion-icon
+            name="clipboard"
+            slot="end"
+            (click)="pasteFromClipboard()">
+          </ion-icon>
         </ion-input>
 
         <ion-button

@@ -7,7 +7,8 @@ import {
   Output,
   signal,
 } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { getTextFromClipboard } from "@core/utils/common";
 
 @Component({
   selector: "app-new-event-accommodation",
@@ -21,11 +22,12 @@ export class NewEventAccommodationComponent implements OnInit {
 
   protected form = this._formBuilder.group({
     name: [null, Validators.required],
-    description: [null],
+    note: [null],
     place: [null, Validators.required],
     booked: [false],
-    time: [null],
-    link: [null],
+    checkIn: [null],
+    checkOut: [null],
+    link: new FormControl<string | null>(null),
   });
 
   public constructor(private _formBuilder: FormBuilder) {}
@@ -51,5 +53,10 @@ export class NewEventAccommodationComponent implements OnInit {
     console.log(this.form.value);
     if (this.form.invalid) return;
     this.close();
+  }
+
+  protected async pasteFromClipboard(): Promise<void> {
+    const text = await getTextFromClipboard();
+    this.form.controls.link.setValue(text);
   }
 }

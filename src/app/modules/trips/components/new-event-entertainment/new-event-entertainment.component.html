@@ -43,7 +43,7 @@
         <!-- From -->
         <app-poi-autocomplete
           label="Place"
-          formControlName="from"
+          formControlName="place"
           [latitude]="52.36994"
           [longitude]="4.90788">
         </app-poi-autocomplete>
@@ -71,6 +71,7 @@
               <ng-template>
                 <ion-datetime
                   presentation="time"
+                  formControlName="reservationTime"
                   id="fromTime">
                 </ion-datetime>
               </ng-template>
@@ -102,7 +103,7 @@
           mode="md"
           labelPlacement="stacked"
           label="Add a note"
-          formControlName="description"
+          formControlName="note"
           fill="outline"
           placeholder="Brings some food">
         </ion-textarea>
@@ -116,6 +117,11 @@
           type="text"
           formControlName="link"
           placeholder="https://odysseypark.com">
+          <ion-icon
+            name="clipboard"
+            slot="end"
+            (click)="pasteFromClipboard()">
+          </ion-icon>
         </ion-input>
 
         <ion-button

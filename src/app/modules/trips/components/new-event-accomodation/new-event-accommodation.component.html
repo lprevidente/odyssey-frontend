@@ -60,6 +60,7 @@
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
               <ion-datetime
+                formControlName="checkIn"
                 presentation="time"
                 id="checkIn">
               </ion-datetime>
@@ -80,6 +81,7 @@
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
               <ion-datetime
+                formControlName="checkOut"
                 presentation="time"
                 id="checkOut">
               </ion-datetime>
@@ -93,7 +95,7 @@
           mode="md"
           labelPlacement="stacked"
           label="Add a note"
-          formControlName="description"
+          formControlName="note"
           fill="outline"
           placeholder="Include the hairdryer :D">
         </ion-textarea>
@@ -107,6 +109,11 @@
           type="text"
           formControlName="link"
           placeholder="https://odysseyhotel.com">
+          <ion-icon
+            name="clipboard"
+            slot="end"
+            (click)="pasteFromClipboard()">
+          </ion-icon>
         </ion-input>
 
         <ion-button
