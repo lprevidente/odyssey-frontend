@@ -7,16 +7,14 @@
     *ngFor="let event of timelineEvents">
     <div class="timeline-item-marker">
       <ion-icon [name]="event.icon"></ion-icon>
-      <p>{{ event.time }}</p>
+      <p class="text-sm font-semibold">{{ event.time }}</p>
     </div>
 
     @switch (event.type) {
       @case ("transportation") {
         <ng-container
-          *ngTemplateOutlet="
-            transportationEvent;
-            context: { event }
-          "></ng-container>
+          *ngTemplateOutlet="transportationEvent; context: { event }">
+        </ng-container>
       }
       @default {
         <ng-container *ngTemplateOutlet="defaultEvent; context: { event }">

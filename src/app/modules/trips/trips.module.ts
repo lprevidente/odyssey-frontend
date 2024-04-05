@@ -14,6 +14,7 @@ import { AdressModule } from "@shared/address/adress.module";
 import { NewEventTransportationComponent } from "@modules/trips/components/new-event-transportation/new-event-transportation.component";
 import { NewEventEateryComponent } from "@modules/trips/components/new-event-eatery/new-event-eatery.component";
 import { NewEventAccommodationComponent } from "@modules/trips/components/new-event-accomodation/new-event-accommodation.component";
+import { NewEventEntertainmentComponent } from "@modules/trips/components/new-event-entertainment/new-event-entertainment.component";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NewEventAccommodationComponent } from "@modules/trips/components/new-ev
     NewEventTransportationComponent,
     NewEventEateryComponent,
     NewEventAccommodationComponent,
+    NewEventEntertainmentComponent,
   ],
   imports: [
     IonicModule,

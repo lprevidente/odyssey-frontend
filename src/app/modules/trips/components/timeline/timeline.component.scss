@@ -21,11 +21,6 @@
         font-size: 20px;
         margin-bottom: 5px;
       }
-
-      p {
-        margin-top: 5px;
-        font-weight: 500;
-      }
     }
 
     .timeline-item-content {
@@ -146,7 +141,7 @@
         content: "";
         position: absolute;
         bottom: 0;
-        left: 35px;
+        left: 31px;
         width: 2px;
         height: calc(100% - 60px);
         border-left: 2px dashed var(--ion-color-primary);

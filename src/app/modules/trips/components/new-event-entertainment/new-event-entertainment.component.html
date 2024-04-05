@@ -6,7 +6,7 @@
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start"></ion-buttons>
-        <ion-title>Fuel Your Journey</ion-title>
+        <ion-title>Discover Your Destinations</ion-title>
 
         <!-- Close button -->
         <ion-buttons slot="end">
@@ -21,7 +21,7 @@
 
     <ion-content class="ion-padding">
       <p class="text-gray-800 dark:text-gray-400 text-justify">
-        Add Dining Destinations to Your Travel Planner
+        Input Your Favorite Places to Enrich Every Traveler's Journey
       </p>
 
       <form
@@ -37,12 +37,13 @@
           labelPlacement="stacked"
           type="text"
           formControlName="name"
-          placeholder="Dinner at Odyssey Restaurant">
+          placeholder="Odyssey Park">
         </ion-input>
 
+        <!-- From -->
         <app-poi-autocomplete
           label="Place"
-          formControlName="place"
+          formControlName="from"
           [latitude]="52.36994"
           [longitude]="4.90788">
         </app-poi-autocomplete>
@@ -52,10 +53,10 @@
           formControlName="booked"
           class="w-full text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           mode="md">
-          Do you have a reservation?
+          Have you booked tickets?
         </ion-toggle>
 
-        @if (form.value.booked) {
+        @if (form.controls.booked.valueChanges | async) {
           <div class="mt-2 flex flex-row items-center">
             <label
               class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-grow">
@@ -75,6 +76,23 @@
               </ng-template>
             </ion-modal>
           </div>
+
+          <div class="mt-4">
+            <label
+              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              for="tickets">
+              Tickets
+            </label>
+            <input
+              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              id="tickets"
+              placeholder="Upload your tickets"
+              accept=".pdf"
+              type="file" />
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              You can only upload PDF files.
+            </p>
+          </div>
         }
 
         <!-- Note -->
@@ -86,18 +104,18 @@
           label="Add a note"
           formControlName="description"
           fill="outline"
-          placeholder="It has some vegetarian dishies">
+          placeholder="Brings some food">
         </ion-textarea>
 
-        <!-- Link To Restaurant -->
+        <!-- Link -->
         <ion-input
           mode="md"
           fill="outline"
-          label="Link to restaurant"
+          label="Link to the place"
           labelPlacement="stacked"
           type="text"
           formControlName="link"
-          placeholder="https://odysseyrestaurant.com">
+          placeholder="https://odysseypark.com">
         </ion-input>
 
         <ion-button
