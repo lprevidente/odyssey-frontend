@@ -7,7 +7,7 @@
       <ion-icon name="bus-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-button (click)="isEntertainmentOpen = true">
-      <ion-icon name="walk"></ion-icon>
+      <ion-icon name="storefront-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-button (click)="isEateryOpen = true">
       <ion-icon name="restaurant-outline"></ion-icon>
@@ -21,4 +21,7 @@
 <app-new-event-transportation [(openModel)]="isTransportationOpen">
 </app-new-event-transportation>
 
-<app-new-event-eatery [(openModel)]="isEateryOpen"></app-new-event-eatery>
+<app-new-event-eatery [(openModel)]="isEateryOpen"> </app-new-event-eatery>
+
+<app-new-event-accommodation [(openModel)]="isAccommodationOpen">
+</app-new-event-accommodation>

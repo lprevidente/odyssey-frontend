@@ -13,6 +13,7 @@ import { CounterInputComponent } from "@shared/counter-input/counter-input.compo
 import { AdressModule } from "@shared/address/adress.module";
 import { NewEventTransportationComponent } from "@modules/trips/components/new-event-transportation/new-event-transportation.component";
 import { NewEventEateryComponent } from "@modules/trips/components/new-event-eatery/new-event-eatery.component";
+import { NewEventAccommodationComponent } from "@modules/trips/components/new-event-accomodation/new-event-accommodation.component";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NewEventEateryComponent } from "@modules/trips/components/new-event-eat
     NewTripPage,
     NewEventTransportationComponent,
     NewEventEateryComponent,
+    NewEventAccommodationComponent,
   ],
   imports: [
     IonicModule,

@@ -1,0 +1,122 @@
+<ion-modal
+  [presentingElement]="presentingElement"
+  [isOpen]="isModalOpen()"
+  (willDismiss)="close()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start"></ion-buttons>
+        <ion-title>Settle Your Stay</ion-title>
+
+        <!-- Close button -->
+        <ion-buttons slot="end">
+          <ion-button
+            (click)="close()"
+            [strong]="true">
+            Close
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <p class="text-gray-800 dark:text-gray-400 text-justify">
+        Add Accommodation Details to Your Travel Planner
+      </p>
+
+      <form
+        (ngSubmit)="addPlace()"
+        [formGroup]="form"
+        class="form">
+        <!-- Name -->
+        <ion-input
+          class="mt-4"
+          mode="md"
+          fill="outline"
+          label="Label"
+          labelPlacement="stacked"
+          type="text"
+          formControlName="name"
+          placeholder="Hotel Odyssey">
+        </ion-input>
+
+        <app-poi-autocomplete
+          label="Place"
+          formControlName="place"
+          [latitude]="52.36994"
+          [longitude]="4.90788">
+        </app-poi-autocomplete>
+
+        <div class="mt-2 flex flex-row items-center">
+          <label
+            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-grow">
+            Check-in
+          </label>
+          <ion-datetime-button
+            mode="md"
+            datetime="checkIn">
+          </ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime
+                presentation="time"
+                id="checkIn">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </div>
+
+        <div class="mt-2 mb-2 flex flex-row items-center">
+          <label
+            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-grow">
+            Check-out
+          </label>
+          <ion-datetime-button
+            mode="md"
+            datetime="checkOut">
+          </ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime
+                presentation="time"
+                id="checkOut">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </div>
+
+        <!-- Note -->
+        <ion-textarea
+          rows="3"
+          mode="md"
+          labelPlacement="stacked"
+          label="Add a note"
+          formControlName="description"
+          fill="outline"
+          placeholder="Include the hairdryer :D">
+        </ion-textarea>
+
+        <!-- Link -->
+        <ion-input
+          mode="md"
+          fill="outline"
+          label="Link to accomodation"
+          labelPlacement="stacked"
+          type="text"
+          formControlName="link"
+          placeholder="https://odysseyhotel.com">
+        </ion-input>
+
+        <ion-button
+          type="submit"
+          expand="block"
+          class="mt-4"
+          color="primary">
+          Add
+        </ion-button>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

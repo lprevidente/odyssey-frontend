@@ -10,14 +10,15 @@ import {
 import { FormBuilder, Validators } from "@angular/forms";
 
 @Component({
-  selector: "app-new-event-eatery",
-  templateUrl: "./new-event-eatery.component.html",
-  styleUrls: ["./new-event-eatery.component.scss"],
+  selector: "app-new-event-accommodation",
+  templateUrl: "./new-event-accommodation.component.html",
+  styleUrls: ["./new-event-accommodation.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewEventEateryComponent implements OnInit {
+export class NewEventAccommodationComponent implements OnInit {
   protected readonly isModalOpen = signal<boolean>(false);
   protected presentingElement: globalThis.Element | null = null;
+
   protected form = this._formBuilder.group({
     name: [null, Validators.required],
     description: [null],

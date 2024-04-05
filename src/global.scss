@@ -33,7 +33,8 @@
 
 .form {
   ion-select,
-  ion-input {
+  ion-input,
+  ion-textarea {
     padding: 10px 0 !important;
     --highlight-color-valid: var(--ion-color-primary) !important;
   }
