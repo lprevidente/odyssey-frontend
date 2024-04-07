@@ -6,7 +6,7 @@
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start"></ion-buttons>
-        <ion-title>Fuel Your Journey</ion-title>
+        <ion-title>Settle Your Stay</ion-title>
 
         <!-- Close button -->
         <ion-buttons slot="end">
@@ -21,7 +21,7 @@
 
     <ion-content class="ion-padding">
       <p class="text-gray-800 dark:text-gray-400 text-justify">
-        Add Dining Destinations to Your Travel Planner
+        Add Accommodation Details to Your Travel Planner
       </p>
 
       <form
@@ -37,67 +37,79 @@
           labelPlacement="stacked"
           type="text"
           formControlName="name"
-          placeholder="Dinner at Odyssey Restaurant">
+          placeholder="Stay at Hotel Odyssey">
         </ion-input>
 
         <app-poi-autocomplete
           label="Place"
           formControlName="place"
+          placeholder="Hotel Odyssey"
           [latitude]="52.36994"
           [longitude]="4.90788">
         </app-poi-autocomplete>
 
-        <!-- Reservation -->
-        <ion-toggle
-          formControlName="booked"
-          class="w-full text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          mode="md">
-          Do you have a reservation?
-        </ion-toggle>
+        <div class="mt-2 flex flex-row items-center">
+          <label
+            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-grow">
+            Check-in
+          </label>
+          <ion-datetime-button
+            mode="md"
+            datetime="checkIn">
+          </ion-datetime-button>
 
-        @if (form.value.booked) {
-          <div class="mt-2 flex flex-row items-center">
-            <label
-              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-grow">
-              At what time?
-            </label>
-            <ion-datetime-button
-              mode="md"
-              datetime="fromTime">
-            </ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime
+                formControlName="checkIn"
+                presentation="time"
+                id="checkIn">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </div>
 
-            <ion-modal [keepContentsMounted]="true">
-              <ng-template>
-                <ion-datetime
-                  presentation="time"
-                  id="fromTime">
-                </ion-datetime>
-              </ng-template>
-            </ion-modal>
-          </div>
-        }
+        <div class="mt-2 mb-2 flex flex-row items-center">
+          <label
+            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-grow">
+            Check-out
+          </label>
+          <ion-datetime-button
+            mode="md"
+            datetime="checkOut">
+          </ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime
+                formControlName="checkOut"
+                presentation="time"
+                id="checkOut">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </div>
 
         <!-- Note -->
         <ion-textarea
-          class="mt-2.5"
           rows="3"
           mode="md"
           labelPlacement="stacked"
           label="Add a note"
           formControlName="note"
           fill="outline"
-          placeholder="It has some vegetarian dishies">
+          placeholder="Include the hairdryer :D">
         </ion-textarea>
 
-        <!-- Link To Restaurant -->
+        <!-- Link -->
         <ion-input
           mode="md"
           fill="outline"
-          label="Link to restaurant"
+          label="Link to accomodation"
           labelPlacement="stacked"
           type="text"
           formControlName="link"
-          placeholder="https://odysseyrestaurant.com">
+          placeholder="https://odysseyhotel.com">
           <ion-icon
             name="clipboard"
             slot="end"

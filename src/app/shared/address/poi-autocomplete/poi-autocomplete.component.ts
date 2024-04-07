@@ -32,6 +32,7 @@ export class PoiAutocompleteComponent implements ControlValueAccessor {
   public value = signal<Place | null>(null);
   public latitude = input.required<number>();
   public longitude = input.required<number>();
+  public placeholder = input<string>();
 
   public constructor(private _addressService: AddressService) {
     effect(() => {

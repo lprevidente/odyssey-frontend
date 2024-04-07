@@ -1,4 +1,9 @@
-import { Component, effect, signal } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  signal,
+} from "@angular/core";
 import { TripService } from "@modules/trips/services/trip.service";
 import { Trip } from "@modules/trips/models/trip";
 import { format } from "date-fns";
@@ -7,6 +12,7 @@ import { format } from "date-fns";
   selector: "app-all-trips",
   templateUrl: "all-trips.page.html",
   styleUrls: ["all-trips.page.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AllTripsPage {
   protected allTrips: Trip[] = [];

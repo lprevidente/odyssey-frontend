@@ -8,36 +8,25 @@ import {
   signal,
 } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { getTextFromClipboard } from "@core/utils/common";
 
 @Component({
-  selector: "app-new-event-transportation",
-  templateUrl: "./new-event-transportation.component.html",
-  styleUrls: ["./new-event-transportation.component.scss"],
+  selector: "app-new-event-entertainment",
+  templateUrl: "./new-event-entertainment.component.html",
+  styleUrls: ["./new-event-entertainment.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewEventTransportationComponent implements OnInit {
+export class NewEventEntertainmentComponent implements OnInit {
   protected readonly isModalOpen = signal<boolean>(false);
-  protected presentingElement: globalThis.Element | null = null;
+  protected presentingElement: unknown = null;
   protected form = this._formBuilder.group({
     name: [null, Validators.required],
     note: [null],
-    means: ["bus", Validators.required],
-    from: [null, Validators.required],
-    to: [null, Validators.required],
-    departureTime: [null],
-    arrivalTime: [null],
+    place: [null, Validators.required],
+    reservation: [false],
+    reservationTime: [null],
+    link: [""],
   });
-
-  protected readonly transportationMeans = [
-    { value: "walk", label: "Walk" },
-    { value: "bus", label: "Bus" },
-    { value: "train", label: "Train/Metro" },
-    { value: "airplane", label: "Airplane" },
-    { value: "car", label: "Car" },
-  ];
-
-  protected readonly trackBy: (index: number) => number = (index: number) =>
-    index;
 
   public constructor(private _formBuilder: FormBuilder) {}
 
@@ -62,5 +51,10 @@ export class NewEventTransportationComponent implements OnInit {
     console.log(this.form.value);
     if (this.form.invalid) return;
     this.close();
+  }
+
+  protected async pasteFromClipboard(): Promise<void> {
+    const text = await getTextFromClipboard();
+    this.form.controls.link.setValue(text);
   }
 }

@@ -1,0 +1,26 @@
+<div class="timeline-item">
+  <div class="timeline-item-marker">
+    <ion-icon name="restaurant-outline"></ion-icon>
+    <p class="text-sm font-semibold">{{ activity().time }}</p>
+    <div class="dot"></div>
+  </div>
+
+  <div class="timeline-item-content">
+    <div class="header">
+      <span class="title">
+        {{ activity().name }}
+      </span>
+    </div>
+    <p class="description">{{ activity().notes }}</p>
+    <div class="footer">
+      <div class="place">
+        <ion-icon name="location-outline"></ion-icon>
+        <ion-button
+          fill="clear"
+          class="place">
+          {{ activity().place.title }}
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</div>

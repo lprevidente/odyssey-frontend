@@ -37,27 +37,27 @@
           labelPlacement="stacked"
           type="text"
           formControlName="name"
-          placeholder="Flight to Rome">
+          placeholder="Going to Itacha">
         </ion-input>
 
-        <!-- Means of transport -->
+        <!-- Transport types -->
         <div class="mt-6 mb-4">
           <p
             class="text-sm font-medium mb-2 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
             Transportation type
           </p>
-          <ion-radio-group formControlName="means">
-            @for (means of transportationMeans; track trackBy) {
+          <ion-radio-group formControlName="type">
+            @for (type of transportationTypes; track trackBy) {
               <ion-radio
                 mode="md"
                 class="w-full"
-                [value]="means.value">
+                [value]="type.value">
                 <ion-icon
                   class="align-middle"
                   aria-hidden="true"
-                  name="{{ means.value }}-outline">
+                  name="{{ type.value }}-outline">
                 </ion-icon>
-                {{ means.label }}
+                {{ type.label }}
               </ion-radio>
             }
           </ion-radio-group>
@@ -67,6 +67,7 @@
         <app-poi-autocomplete
           label="From"
           formControlName="from"
+          placeholder="Ogigia Island"
           [latitude]="52.36994"
           [longitude]="4.90788">
         </app-poi-autocomplete>
@@ -75,6 +76,7 @@
         <app-poi-autocomplete
           label="To"
           formControlName="to"
+          placeholder="Ithaca Island"
           [latitude]="52.36994"
           [longitude]="4.90788">
         </app-poi-autocomplete>
@@ -124,6 +126,23 @@
           </div>
         </div>
 
+        <!-- Number of stops -->
+        <ion-input
+          *ngIf="
+            form.value.type === 'bus' ||
+            form.value.type === 'train' ||
+            form.value.type === 'flight'
+          "
+          class="mt-4"
+          mode="md"
+          fill="outline"
+          label="Number"
+          labelPlacement="stacked"
+          type="text"
+          formControlName="number"
+          placeholder="FR 1234">
+        </ion-input>
+
         <!-- Note -->
         <ion-textarea
           class="mt-2.5"
@@ -131,7 +150,7 @@
           mode="md"
           labelPlacement="stacked"
           label="Add a note"
-          formControlName="note"
+          formControlName="notes"
           fill="outline"
           placeholder="Don't forget to bring the sunscreen">
         </ion-textarea>
@@ -146,6 +165,7 @@
             class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             id="tickets"
             placeholder="Upload your tickets"
+            multiple
             accept=".pdf"
             type="file" />
           <p class="text-xs text-gray-500 dark:text-gray-400">

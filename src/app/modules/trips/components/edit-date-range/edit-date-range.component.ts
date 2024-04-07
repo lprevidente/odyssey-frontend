@@ -18,7 +18,7 @@ import { CalendarComponentOptions } from "@googlproxer/ion-range-calendar";
 })
 export class EditDateRangeComponent implements OnInit {
   protected readonly isModalOpen = signal<boolean>(false);
-  protected presentingElement: globalThis.Element | null = null;
+  protected presentingElement: unknown = null;
   protected form = this._formBuilder.group({
     dateRange: [null, Validators.required],
   });

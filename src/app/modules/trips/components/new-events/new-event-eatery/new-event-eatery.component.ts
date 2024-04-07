@@ -18,7 +18,7 @@ import { getTextFromClipboard } from "@core/utils/common";
 })
 export class NewEventEateryComponent implements OnInit {
   protected readonly isModalOpen = signal<boolean>(false);
-  protected presentingElement: globalThis.Element | null = null;
+  protected presentingElement: unknown = null;
   protected form = this._formBuilder.group({
     name: [null, Validators.required],
     note: [null],

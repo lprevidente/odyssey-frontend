@@ -2,71 +2,30 @@
   <ion-label>21 Jul</ion-label>
 </ion-list-header>
 <div class="timeline">
-  <div
-    class="timeline-item"
-    *ngFor="let event of timelineEvents">
-    <div class="timeline-item-marker">
-      <ion-icon [name]="event.icon"></ion-icon>
-      <p class="text-sm font-semibold">{{ event.time }}</p>
-    </div>
-
-    @switch (event.type) {
+  @for (activity of activities; track trackByActivityId) {
+    @switch (activity.type) {
       @case ("transportation") {
-        <ng-container
-          *ngTemplateOutlet="transportationEvent; context: { event }">
-        </ng-container>
+        <app-event-transportation [activity]="activity">
+        </app-event-transportation>
       }
-      @default {
-        <ng-container *ngTemplateOutlet="defaultEvent; context: { event }">
-        </ng-container>
+      @case ("accommodation") {
+        <app-event-accommodation [activity]="activity">
+        </app-event-accommodation>
+      }
+      @case ("eatery") {
+        <app-event-eatery [activity]="activity"></app-event-eatery>
+      }
+      @case ("entertainment") {
+        <app-event-entertainment [activity]="activity">
+        </app-event-entertainment>
       }
     }
-  </div>
+  }
 
-  <div
-    class="timeline-item"
-    style="height: 50px">
+  <div style="height: 50px">
     <app-new-event></app-new-event>
   </div>
 </div>
-
-<ng-template
-  let-event="event"
-  #transportationEvent>
-  <div class="timeline-item-content">
-    <div class="header">
-      <span class="title">{{ event.title }}</span>
-      <div>
-        <ion-button
-          fill="clear"
-          class="ticket">
-          <ion-icon name="ticket-outline"></ion-icon>
-          <span>{{ event.flightNumber }}</span>
-        </ion-button>
-      </div>
-    </div>
-    <p class="description">{{ event.description }}</p>
-    <div class="timeline-transportation">
-      <div class="point">
-        <ion-button
-          fill="clear"
-          class="place">
-          {{ event.startPointPlace }}
-        </ion-button>
-        <p class="time">{{ event.startPointTime }}</p>
-        <p class="line-dashed"></p>
-      </div>
-      <div class="point">
-        <ion-button
-          fill="clear"
-          class="place">
-          {{ event.endPointPlace }}
-        </ion-button>
-        <p class="time">{{ event.endPointTime }}</p>
-      </div>
-    </div>
-  </div>
-</ng-template>
 
 <ng-template
   let-event="event"
@@ -76,10 +35,6 @@
       <span class="title">
         {{ event.title }}
       </span>
-      <div class="ratings">
-        <ion-icon name="star"></ion-icon>
-        4.2
-      </div>
     </div>
     <p class="description">{{ event.description }}</p>
     <div class="footer">

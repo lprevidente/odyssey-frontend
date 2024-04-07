@@ -8,7 +8,7 @@ import {
   signal,
 } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
-import { getTextFromClipboard } from "@core/utils/common";
+import { getTextFromClipboard } from "../../../../../core/utils/common";
 
 @Component({
   selector: "app-new-event-accommodation",
@@ -18,13 +18,11 @@ import { getTextFromClipboard } from "@core/utils/common";
 })
 export class NewEventAccommodationComponent implements OnInit {
   protected readonly isModalOpen = signal<boolean>(false);
-  protected presentingElement: globalThis.Element | null = null;
-
+  protected presentingElement: unknown = null;
   protected form = this._formBuilder.group({
     name: [null, Validators.required],
     note: [null],
     place: [null, Validators.required],
-    booked: [false],
     checkIn: [null],
     checkOut: [null],
     link: new FormControl<string | null>(null),

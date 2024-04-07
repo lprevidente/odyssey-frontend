@@ -17,7 +17,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 })
 export class EditGuestsComponent implements OnInit {
   protected readonly isModalOpen = signal<boolean>(false);
-  protected presentingElement: globalThis.Element | null = null;
+  protected presentingElement: unknown = null;
   protected form = this._formBuilder.group({
     adults: [0, [Validators.required, Validators.min(1)]],
     children: [0, Validators.required],
