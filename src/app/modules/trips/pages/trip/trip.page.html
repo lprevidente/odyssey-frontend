@@ -36,11 +36,13 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-timeline></app-timeline>
-
+  @for (date of dates(); track trackByDate) {
+  <app-timeline [date]="date"></app-timeline>
+  }
   <ion-button
     color="danger"
     fill="clear"
+    id="open-action-sheet"
     class="place underline mt-2">
     <span>Delete Trip</span>
   </ion-button>
@@ -59,4 +61,11 @@
   [id]="trip().id"
   [(openModel)]="isEditGuestsOpen">
 </app-edit-guests>
+
+<ion-action-sheet
+  trigger="open-action-sheet"
+  header="Are you sure?"
+  (didDismiss)="actionResult($event)"
+  [buttons]="actionSheetButtons">
+</ion-action-sheet>
 }

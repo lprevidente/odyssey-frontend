@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { NewTrip } from "@modules/trips/models/new-trip";
 import { TripDetails, TripInfo } from "@modules/trips/models/tripInfo";
 import { TransformDate } from "@core/utils/date.utils";
-import { DateRange } from "@modules/trips/models/date-range";
+import { DateRange, format } from "@modules/trips/models/date-range";
 import { People } from "@modules/trips/models/people";
 
 @Injectable({ providedIn: "root" })
@@ -29,17 +29,24 @@ export class TripService {
   }
 
   public createTrip(trip: NewTrip): Observable<TripInfo> {
-    return this._httpClient.post<TripInfo>(`${this._endpoint}`, trip);
+    return this._httpClient.post<TripInfo>(`${this._endpoint}`, {
+      ...trip,
+      dateRange: format(trip.dateRange),
+    });
   }
 
   public updateDateRange(id: string, dateRange: DateRange): Observable<void> {
     return this._httpClient.put<void>(
       `${this._endpoint}/${id}/date-range`,
-      dateRange
+      format(dateRange)
     );
   }
 
   public updatePeople(id: string, people: People): Observable<void> {
     return this._httpClient.put<void>(`${this._endpoint}/${id}/people`, people);
+  }
+
+  public deleteTrip(id: string): Observable<void> {
+    return this._httpClient.delete<void>(`${this._endpoint}/${id}`);
   }
 }

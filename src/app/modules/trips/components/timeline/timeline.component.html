@@ -1,5 +1,5 @@
 <ion-list-header>
-  <ion-label>21 Jul</ion-label>
+  <ion-label>{{ date() | date: "dd MMM" }}</ion-label>
 </ion-list-header>
 <div class="timeline">
   @for (activity of activities; track trackByActivityId) {
@@ -20,38 +20,11 @@
         </app-event-entertainment>
       }
     }
+  } @empty {
+    <p class="text-gray-500">No activities for the day</p>
   }
 
   <div style="height: 50px">
     <app-new-event></app-new-event>
   </div>
 </div>
-
-<ng-template
-  let-event="event"
-  #defaultEvent>
-  <div class="timeline-item-content">
-    <div class="header">
-      <span class="title">
-        {{ event.title }}
-      </span>
-    </div>
-    <p class="description">{{ event.description }}</p>
-    <div class="footer">
-      <div class="place">
-        <ion-icon name="location-outline"></ion-icon>
-        <ion-button
-          fill="clear"
-          class="place">
-          {{ event.place }}
-        </ion-button>
-      </div>
-      <div
-        *ngIf="event.expense"
-        class="expense">
-        <ion-icon name="wallet-outline"></ion-icon>
-        <span>{{ event.expense | currency }} </span>
-      </div>
-    </div>
-  </div>
-</ng-template>

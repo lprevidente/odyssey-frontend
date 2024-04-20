@@ -11,24 +11,12 @@ import { Router } from "@angular/router";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteAccountComponent {
-  protected actionSheetButtons = [
-    {
-      text: "Delete",
-      role: "destructive",
-      data: {
-        action: "delete",
-      },
-    },
-    {
-      text: "Cancel",
-      role: "cancel",
-      data: {
-        action: "cancel",
-      },
-    },
+  protected readonly actionSheetButtons = [
+    { text: "Delete", role: "destructive", data: { action: "delete" } },
+    { text: "Cancel", role: "cancel", data: { action: "cancel" } },
   ];
 
-  public constructor(
+  constructor(
     private _profileService: ProfileService,
     private _authService: AuthService,
     private _router: Router
