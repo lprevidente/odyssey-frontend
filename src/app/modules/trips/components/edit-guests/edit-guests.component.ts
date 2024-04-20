@@ -2,12 +2,17 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  input,
   Input,
   OnInit,
   Output,
   signal,
 } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { TripService } from "@modules/trips/services/trip.service";
+import { LoadingService } from "@core/services/loading.service";
+import { ToastSavingService } from "@core/services/toast-saving.service";
+import { People } from "@modules/trips/models/people";
 
 @Component({
   selector: "app-edit-guests",
@@ -23,7 +28,17 @@ export class EditGuestsComponent implements OnInit {
     children: [0, Validators.required],
   });
 
-  public constructor(private _formBuilder: FormBuilder) {}
+  public id = input.required<string>();
+
+  @Output()
+  public guestsChange = new EventEmitter<People>();
+
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _tripService: TripService,
+    private _loadingService: LoadingService,
+    private _toastSavingService: ToastSavingService
+  ) {}
 
   public ngOnInit(): void {
     this.presentingElement = document.querySelector(".ion-pages");
@@ -42,9 +57,33 @@ export class EditGuestsComponent implements OnInit {
     this.isModalOpen.set(value);
   }
 
+  @Input({ required: true })
+  public set guests(value: People) {
+    this.form.patchValue(value);
+  }
+
   protected addPlace(): void {
-    console.log(this.form.value);
     if (this.form.invalid) return;
+    const guests = this.form.getRawValue() as People;
+    this._loadingService.showLoading();
+    this._tripService
+      .updatePeople(this.id(), guests)
+      .subscribe({
+        next: () => this.showToastAndClose(guests),
+        error: () => this.showErrorMessage(),
+      })
+      .add(() => this._loadingService.hideLoading());
+  }
+
+  private showToastAndClose(people: People) {
+    this._toastSavingService.showSaved();
+    this.guestsChange.emit(people);
     this.close();
+  }
+
+  private showErrorMessage() {
+    this._toastSavingService.showErrorWithMessage(
+      "Error while updating guests. Please try again."
+    );
   }
 }

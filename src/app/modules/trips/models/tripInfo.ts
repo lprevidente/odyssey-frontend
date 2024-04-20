@@ -1,6 +1,7 @@
 import { Place } from "@modules/trips/models/address";
 import { People } from "@modules/trips/models/people";
 import { DateRange } from "@modules/trips/models/date-range";
+import { Activity } from "@modules/trips/models/activity";
 
 export interface TripInfo {
   id: string;
@@ -16,4 +17,5 @@ export interface TripDetails {
   name: string;
   dateRange: DateRange;
   people: People;
+  activities: { [date: string]: Activity[] };
 }

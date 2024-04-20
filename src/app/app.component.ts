@@ -11,7 +11,7 @@ import { Observable } from "rxjs";
 export class AppComponent implements OnInit {
   protected readonly isLoading$;
 
-  public constructor(
+  constructor(
     private _loadingService: LoadingService,
     private _toastSavingService: ToastSavingService
   ) {
