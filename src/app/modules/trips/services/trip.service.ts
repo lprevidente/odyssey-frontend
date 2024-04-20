@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { BASE_PATH } from "../../../app.module";
 import { Observable } from "rxjs";
 import { NewTrip } from "@modules/trips/models/new-trip";
-import { Trip } from "@modules/trips/models/trip";
+import { TripInfo } from "@modules/trips/models/tripInfo";
 import { TransformDate } from "@core/utils/date.utils";
 
 @Injectable({ providedIn: "root" })
@@ -18,11 +18,11 @@ export class TripService {
   }
 
   @TransformDate
-  public getTrips(): Observable<Trip[]> {
-    return this._httpClient.get<Trip[]>(`${this._endpoint}`);
+  public getTrips(): Observable<TripInfo[]> {
+    return this._httpClient.get<TripInfo[]>(`${this._endpoint}`);
   }
 
-  public createTrip(trip: NewTrip): Observable<Trip> {
-    return this._httpClient.post<Trip>(`${this._endpoint}`, trip);
+  public createTrip(trip: NewTrip): Observable<TripInfo> {
+    return this._httpClient.post<TripInfo>(`${this._endpoint}`, trip);
   }
 }

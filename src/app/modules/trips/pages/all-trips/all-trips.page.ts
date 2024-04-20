@@ -1,11 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  signal,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, signal } from "@angular/core";
 import { TripService } from "@modules/trips/services/trip.service";
-import { Trip } from "@modules/trips/models/trip";
+import { TripInfo } from "@modules/trips/models/tripInfo";
 import { format } from "date-fns";
 
 @Component({
@@ -15,42 +10,22 @@ import { format } from "date-fns";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AllTripsPage {
-  protected allTrips: Trip[] = [];
-  protected readonly trips = signal<Trip[]>([]);
-  protected readonly trackByFn = (_: number, trip: Trip): string => trip.id;
-
-  protected readonly sectionActive = signal<"active" | "upcoming" | "past">(
-    "active"
-  );
+  protected allTrips: TripInfo[] = [];
+  protected readonly trips = signal<TripInfo[]>([]);
+  protected readonly trackByFn = (_: number, trip: TripInfo): string => trip.id;
 
   protected readonly searchActive = signal<boolean>(false);
 
-  public constructor(private _tripService: TripService) {
-    effect(
-      () => {
-        const section = this.sectionActive();
-        if (section === "active") {
-          this.trips.set(this.allTrips.filter(this._isActive));
-        }
-        if (section === "upcoming") {
-          this.trips.set(this.allTrips.filter(this._isUpcoming));
-        }
-        if (section === "past") {
-          this.trips.set(this.allTrips.filter(this._isPast));
-        }
-      },
-      { allowSignalWrites: true }
-    );
-  }
+  public constructor(private _tripService: TripService) {}
 
   public ionViewWillEnter(): void {
     this._tripService.getTrips().subscribe(t => {
       this.allTrips = t;
-      this.sectionActive.set("active");
+      this.trips.set(t);
     });
   }
 
-  protected range(trip: Trip): string {
+  protected range(trip: TripInfo): string {
     const fromStr = format(trip.dateRange.from, "MMM dd");
     const toStr = format(trip.dateRange.to, "MMM dd");
     return `${fromStr} - ${toStr}`;
@@ -58,21 +33,20 @@ export class AllTripsPage {
 
   protected searchTrip(event: any): void {
     const searchString = event.target.value.toLowerCase();
-    console.log(searchString);
     this.trips.set(
       this.allTrips.filter(t => t.name.toLowerCase().includes(searchString))
     );
   }
 
-  private _isUpcoming(trip: Trip): boolean {
+  private _isUpcoming(trip: TripInfo): boolean {
     return trip.dateRange.to >= new Date();
   }
 
-  private _isPast(trip: Trip): boolean {
+  private _isPast(trip: TripInfo): boolean {
     return trip.dateRange.to < new Date();
   }
 
-  protected _isActive(trip: Trip): boolean {
+  protected _isActive(trip: TripInfo): boolean {
     return trip.dateRange.from >= new Date() && trip.dateRange.to <= new Date();
   }
 }

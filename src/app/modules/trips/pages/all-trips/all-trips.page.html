@@ -20,7 +20,7 @@
             name="close-outline">
           </ion-icon>
         </ion-button>
-        } @else {
+        } @else if (trips().length > 0) {
         <!-- Search -->
         <ion-button (click)="searchActive.set(true)">
           <ion-icon
@@ -47,24 +47,6 @@
     animated="true"
     placeholder="Search trip">
   </ion-searchbar>
-  } @else {
-  <div class="trips-type">
-    <span
-      (click)="sectionActive.set('active')"
-      [class.selected]="sectionActive() === 'active'">
-      Active
-    </span>
-    <span
-      (click)="sectionActive.set('upcoming')"
-      [class.selected]="sectionActive() === 'upcoming'">
-      Upcoming
-    </span>
-    <span
-      (click)="sectionActive.set('past')"
-      [class.selected]="sectionActive() === 'past'">
-      Past
-    </span>
-  </div>
   }
 
   <div class="trips">
@@ -80,19 +62,25 @@
       <span class="price">480 $</span>
       <div class="shared-with">
         <ion-avatar>
-          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          <img
+            alt="avatar"
+            src="https://ionicframework.com/docs/img/demos/avatar.svg" />
         </ion-avatar>
       </div>
     </ion-card>
-
     } @empty {
-
     <div class="empty">
-      <ion-icon
-        size="large"
-        name="albums-outline">
-      </ion-icon>
-      <p>No trips found</p>
+      <ion-buttons>
+        <ion-button
+          routerLink="/tabs/trips/new"
+          class="!m-auto">
+          <ion-icon
+            color="primary"
+            size="large"
+            name="add-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <p>Start a New <b>Adventure</b></p>
     </div>
 
     }

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { TripService } from "@modules/trips/services/trip.service";
 
 @Component({
   selector: "app-trip",
@@ -9,4 +10,6 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
 export class TripPage {
   protected isEditRangeOpen = false;
   protected isEditGuestsOpen = false;
+
+  constructor(private _tripService: TripService) {}
 }
