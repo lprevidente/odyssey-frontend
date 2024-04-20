@@ -18,7 +18,11 @@
   </ion-fab-list>
 </ion-fab>
 
-<app-new-event-entertainment [(openModel)]="isEntertainmentOpen">
+<app-new-event-entertainment
+  (activityAdded)="propagate($event)"
+  [id]="id()"
+  [date]="date()"
+  [(openModel)]="isEntertainmentOpen">
 </app-new-event-entertainment>
 
 <app-new-event-transportation [(openModel)]="isTransportationOpen">

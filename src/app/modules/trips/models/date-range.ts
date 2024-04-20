@@ -1,13 +1,15 @@
-import { format as formatDateFns } from "date-fns";
+import { format } from "date-fns";
 
 export interface DateRange {
   from: Date;
   to: Date;
 }
 
-export const format = (date: DateRange): { from: string; to: string } => {
+export const formatDateRange = (
+  date: DateRange
+): { from: string; to: string } => {
   return {
-    from: formatDateFns(date.from, "yyyy-MM-dd"),
-    to: formatDateFns(date.to, "yyyy-MM-dd"),
+    from: format(date.from, "yyyy-MM-dd"),
+    to: format(date.to, "yyyy-MM-dd"),
   };
 };

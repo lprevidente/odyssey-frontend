@@ -2,7 +2,7 @@
   <ion-label>{{ date() | date: "dd MMM" }}</ion-label>
 </ion-list-header>
 <div class="timeline">
-  @for (activity of activities; track trackByActivityId) {
+  @for (activity of activities(); track trackByActivityId) {
     @switch (activity.type) {
       @case ("transportation") {
         <app-event-transportation [activity]="activity">
@@ -25,6 +25,10 @@
   }
 
   <div style="height: 50px">
-    <app-new-event></app-new-event>
+    <app-new-event
+      (activityAdded)="addActivity($event)"
+      [id]="id()"
+      [date]="date()">
+    </app-new-event>
   </div>
 </div>

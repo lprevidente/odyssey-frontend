@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  input,
+  Output,
+} from "@angular/core";
+import { Activity } from "@modules/trips/models/activity";
 
 @Component({
   selector: "app-new-event",
@@ -7,10 +14,18 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewEventComponent {
+  public id = input.required<string>();
+  public date = input.required<Date>();
+
   protected isTransportationOpen = false;
   protected isEateryOpen = false;
   protected isAccommodationOpen = false;
   protected isEntertainmentOpen = false;
 
-  public constructor() {}
+  @Output()
+  public activityAdded = new EventEmitter<Activity>();
+
+  protected propagate(event: Activity): void {
+    this.activityAdded.emit(event);
+  }
 }

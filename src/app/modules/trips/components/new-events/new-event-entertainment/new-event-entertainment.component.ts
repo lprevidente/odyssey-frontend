@@ -2,13 +2,19 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  input,
   Input,
   OnInit,
   Output,
   signal,
 } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { getTextFromClipboard } from "@core/utils/common";
+import { TripService } from "@modules/trips/services/trip.service";
+import { LoadingService } from "@core/services/loading.service";
+import { ToastSavingService } from "@core/services/toast-saving.service";
+import { Activity, NewEntertainment } from "@modules/trips/models/activity";
+import { Place } from "@modules/trips/models/address";
 
 @Component({
   selector: "app-new-event-entertainment",
@@ -17,18 +23,29 @@ import { getTextFromClipboard } from "@core/utils/common";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewEventEntertainmentComponent implements OnInit {
+  public date = input.required<Date>();
+  public id = input.required<string>();
+
   protected readonly isModalOpen = signal<boolean>(false);
   protected presentingElement: unknown = null;
   protected form = this._formBuilder.group({
-    name: [null, Validators.required],
-    note: [null],
-    place: [null, Validators.required],
+    name: new FormControl<string>("", Validators.required),
+    notes: [null],
+    place: [{} as Place, Validators.required],
     reservation: [false],
-    reservationTime: [null],
+    time: [null],
     link: [""],
   });
 
-  public constructor(private _formBuilder: FormBuilder) {}
+  @Output()
+  public activityAdded = new EventEmitter<Activity>();
+
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _tripService: TripService,
+    private _loadingService: LoadingService,
+    private _toastSavingService: ToastSavingService
+  ) {}
 
   public ngOnInit(): void {
     this.presentingElement = document.querySelector(".ion-pages");
@@ -48,9 +65,29 @@ export class NewEventEntertainmentComponent implements OnInit {
   }
 
   protected addPlace(): void {
-    console.log(this.form.value);
     if (this.form.invalid) return;
+
+    const activity = this.form.getRawValue() as NewEntertainment;
+    this._loadingService.showLoading();
+    this._tripService
+      .addEntertainmentActivity(this.id(), this.date(), activity)
+      .subscribe({
+        next: activity => this.showToastAndClose(activity),
+        error: () => this.showErrorMessages(),
+      })
+      .add(() => this._loadingService.hideLoading());
+  }
+
+  protected showToastAndClose(activity: Activity): void {
+    this._toastSavingService.showSaved();
+    this.activityAdded.emit(activity);
     this.close();
+  }
+
+  protected showErrorMessages(): void {
+    this._toastSavingService.showErrorWithMessage(
+      "An error occurred while adding the entertainment activity."
+    );
   }
 
   protected async pasteFromClipboard(): Promise<void> {

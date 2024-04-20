@@ -9,7 +9,7 @@ export interface Attachment {
 export type Activity = {
   id: string;
   name: string;
-  notes: string;
+  notes: string | null;
   attachments: Attachment[];
   link: string | null;
 } & (
@@ -49,3 +49,6 @@ export interface Entertainment {
   reservation: boolean;
   time: string | null;
 }
+
+export type NewEntertainment = Omit<Activity, "id" | "type" | "attachments"> &
+  Entertainment;

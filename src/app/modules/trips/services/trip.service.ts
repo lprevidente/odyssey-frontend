@@ -5,8 +5,10 @@ import { Observable } from "rxjs";
 import { NewTrip } from "@modules/trips/models/new-trip";
 import { TripDetails, TripInfo } from "@modules/trips/models/tripInfo";
 import { TransformDate } from "@core/utils/date.utils";
-import { DateRange, format } from "@modules/trips/models/date-range";
+import { DateRange, formatDateRange } from "@modules/trips/models/date-range";
 import { People } from "@modules/trips/models/people";
+import { Activity, NewEntertainment } from "@modules/trips/models/activity";
+import { format } from "date-fns";
 
 @Injectable({ providedIn: "root" })
 export class TripService {
@@ -31,14 +33,14 @@ export class TripService {
   public createTrip(trip: NewTrip): Observable<TripInfo> {
     return this._httpClient.post<TripInfo>(`${this._endpoint}`, {
       ...trip,
-      dateRange: format(trip.dateRange),
+      dateRange: formatDateRange(trip.dateRange),
     });
   }
 
   public updateDateRange(id: string, dateRange: DateRange): Observable<void> {
     return this._httpClient.put<void>(
       `${this._endpoint}/${id}/date-range`,
-      format(dateRange)
+      formatDateRange(dateRange)
     );
   }
 
@@ -48,5 +50,17 @@ export class TripService {
 
   public deleteTrip(id: string): Observable<void> {
     return this._httpClient.delete<void>(`${this._endpoint}/${id}`);
+  }
+
+  public addEntertainmentActivity(
+    id: string,
+    date: Date,
+    activity: NewEntertainment
+  ): Observable<Activity> {
+    const dateStr = format(date, "yyyy-MM-dd");
+    return this._httpClient.post<Activity>(
+      `${this._endpoint}/${id}/activities/${dateStr}?type=entertainment`,
+      activity
+    );
   }
 }

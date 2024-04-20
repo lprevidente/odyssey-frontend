@@ -12,5 +12,5 @@ export class EventEntertainmentComponent {
     Activity & { type: "entertainment" } & Entertainment
   >();
 
-  public constructor() {}
+  constructor() {}
 }

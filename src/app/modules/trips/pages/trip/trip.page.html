@@ -37,7 +37,11 @@
   </ion-header>
 
   @for (date of dates(); track trackByDate) {
-  <app-timeline [date]="date"></app-timeline>
+  <app-timeline
+    [id]="trip().id"
+    [activities]="getActivities(date)"
+    [date]="date">
+  </app-timeline>
   }
   <ion-button
     color="danger"

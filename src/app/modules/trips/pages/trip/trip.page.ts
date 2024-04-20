@@ -7,6 +7,7 @@ import { DateRange } from "@modules/trips/models/date-range";
 import { People } from "@modules/trips/models/people";
 import { LoadingService } from "@core/services/loading.service";
 import { ToastSavingService } from "@core/services/toast-saving.service";
+import { Activity } from "@modules/trips/models/activity";
 
 @Component({
   selector: "app-trip",
@@ -15,10 +16,13 @@ import { ToastSavingService } from "@core/services/toast-saving.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TripPage {
-  protected isEditRangeOpen = false;
-  protected isEditGuestsOpen = false;
   protected readonly trip = signal<TripDetails>({} as TripDetails);
   protected readonly loading = signal<boolean>(true);
+  protected readonly trackByDate = (_: number, date: Date): string =>
+    date.toISOString();
+
+  protected isEditRangeOpen = false;
+  protected isEditGuestsOpen = false;
   private _tripId: string;
 
   protected readonly actionSheetButtons = [
@@ -72,13 +76,16 @@ export class TripPage {
       .add(() => this._loadingService.hideLoading());
   }
 
-  protected trackByDate = (index: number, date: Date) => date.toISOString();
-
   protected dates(): Date[] {
     const { from, to } = this.trip().dateRange;
     const days = differenceInDays(to, from);
     return Array.from({ length: days + 1 }, (_, i) => {
       return addDays(from, i);
     });
+  }
+
+  protected getActivities(date: Date): Activity[] {
+    const dateStr = format(date, "yyyy-MM-dd");
+    return this.trip().activities[dateStr] ?? [];
   }
 }
