@@ -1,10 +1,14 @@
-<div class="timeline-item">
+<div
+  appSwipe
+  [class.show-delete-icon]="showDelete()"
+  (swipeLeft)="showDeleteBtn()"
+  (swipeRight)="hideDeleteBtn()"
+  class="timeline-item">
   <div class="timeline-item-marker">
     <ion-icon name="restaurant-outline"></ion-icon>
     <p class="text-sm font-semibold">{{ activity().time }}</p>
     <div class="dot"></div>
   </div>
-
   <div class="timeline-item-content">
     <div class="header">
       <span class="title">
@@ -17,10 +21,18 @@
         <ion-icon name="location-outline"></ion-icon>
         <ion-button
           fill="clear"
-          class="place">
+          class="place overflow-ellipsis">
           {{ activity().place.title }}
         </ion-button>
       </div>
     </div>
   </div>
+
+  @if (showDelete()) {
+    <ion-button
+      color="danger"
+      class="my-auto">
+      <ion-icon name="trash-outline"> </ion-icon>
+    </ion-button>
+  }
 </div>

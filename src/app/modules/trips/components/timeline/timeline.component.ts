@@ -24,7 +24,6 @@ export class TimelineComponent {
 
   @Input({ alias: "activities", required: true })
   public set _activities(activities: Activity[]) {
-    console.log(activities);
     this.activities.set(activities);
   }
 

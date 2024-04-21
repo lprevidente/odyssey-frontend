@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  signal,
+} from "@angular/core";
 import { Activity, Eatery } from "@modules/trips/models/activity";
 
 @Component({
@@ -9,6 +14,15 @@ import { Activity, Eatery } from "@modules/trips/models/activity";
 })
 export class EventEateryComponent {
   public activity = input.required<Activity & { type: "eatery" } & Eatery>();
+  protected showDelete = signal<boolean>(false);
 
-  public constructor() {}
+  constructor() {}
+
+  protected showDeleteBtn(): void {
+    this.showDelete.set(true);
+  }
+
+  protected hideDeleteBtn(): void {
+    this.showDelete.set(false);
+  }
 }

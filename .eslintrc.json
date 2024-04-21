@@ -36,7 +36,8 @@
           {
             "suffixes": [
               "Component",
-              "Dialog"
+              "Dialog",
+              "Page"
             ]
           }
         ],

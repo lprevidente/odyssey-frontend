@@ -7,7 +7,11 @@ import { TripDetails, TripInfo } from "@modules/trips/models/tripInfo";
 import { TransformDate } from "@core/utils/date.utils";
 import { DateRange, formatDateRange } from "@modules/trips/models/date-range";
 import { People } from "@modules/trips/models/people";
-import { Activity, NewEntertainment } from "@modules/trips/models/activity";
+import {
+  Activity,
+  NewEatery,
+  NewEntertainment,
+} from "@modules/trips/models/activity";
 import { format } from "date-fns";
 
 @Injectable({ providedIn: "root" })
@@ -60,6 +64,18 @@ export class TripService {
     const dateStr = format(date, "yyyy-MM-dd");
     return this._httpClient.post<Activity>(
       `${this._endpoint}/${id}/activities/${dateStr}?type=entertainment`,
+      activity
+    );
+  }
+
+  public addEateryActivity(
+    id: string,
+    date: Date,
+    activity: NewEatery
+  ): Observable<Activity> {
+    const dateStr = format(date, "yyyy-MM-dd");
+    return this._httpClient.post<Activity>(
+      `${this._endpoint}/${id}/activities/${dateStr}?type=eatery`,
       activity
     );
   }

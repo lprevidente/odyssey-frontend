@@ -1,4 +1,9 @@
-<div class="timeline-item">
+<div
+  class="timeline-item"
+  appSwipe
+  [class.show-delete-icon]="showDelete()"
+  (swipeLeft)="showDeleteBtn()"
+  (swipeRight)="hideDeleteBtn()">
   <div class="timeline-item-marker">
     <ion-icon name="eye-outline"></ion-icon>
     <p class="text-sm font-semibold">{{ activity().time }}</p>
@@ -23,4 +28,12 @@
       </div>
     </div>
   </div>
+
+  @if (showDelete()) {
+    <ion-button
+      color="danger"
+      class="my-auto">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-button>
+  }
 </div>

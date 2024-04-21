@@ -64,6 +64,11 @@
     gap: 12px;
     align-items: flex-start;
     position: relative;
+    transition: transform 0.3s ease-in-out;
+
+    &.show-delete-icon {
+      transform: translateX(-10px); // Adjust this value as needed
+    }
 
     .timeline-item-marker {
       min-width: 42px;

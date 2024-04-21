@@ -1,5 +1,6 @@
 import {
   APP_INITIALIZER,
+  CUSTOM_ELEMENTS_SCHEMA,
   InjectionToken,
   isDevMode,
   NgModule,
@@ -62,5 +63,6 @@ export function initApp(meService: MeService, router: Router) {
     },
   ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

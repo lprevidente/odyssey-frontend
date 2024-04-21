@@ -52,3 +52,11 @@ export interface Entertainment {
 
 export type NewEntertainment = Omit<Activity, "id" | "type" | "attachments"> &
   Entertainment;
+
+export type NewEatery = Omit<Activity, "id" | "type" | "attachments"> & Eatery;
+
+export type NewAccommodation = Omit<Activity, "id" | "type" | "attachments"> &
+  Accommodation;
+
+export type NewTransportation = Omit<Activity, "id" | "type" | "attachments"> &
+  Transportation;

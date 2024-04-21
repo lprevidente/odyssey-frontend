@@ -8,7 +8,7 @@ import {
   Output,
   signal,
 } from "@angular/core";
-import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { getTextFromClipboard } from "@core/utils/common";
 import { TripService } from "@modules/trips/services/trip.service";
 import { LoadingService } from "@core/services/loading.service";
@@ -29,7 +29,7 @@ export class NewEventEntertainmentComponent implements OnInit {
   protected readonly isModalOpen = signal<boolean>(false);
   protected presentingElement: unknown = null;
   protected form = this._formBuilder.group({
-    name: new FormControl<string>("", Validators.required),
+    name: ["", Validators.required],
     notes: [null],
     place: [{} as Place, Validators.required],
     reservation: [false],

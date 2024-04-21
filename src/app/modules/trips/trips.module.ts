@@ -1,5 +1,5 @@
 import { IonicModule } from "@ionic/angular";
-import { NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AllTripsPage } from "./pages/all-trips/all-trips.page";
@@ -21,6 +21,7 @@ import { EventTransportationComponent } from "@modules/trips/components/events/e
 import { EventAccommodationComponent } from "@modules/trips/components/events/event-accomodation/event-accommodation.component";
 import { EventEateryComponent } from "@modules/trips/components/events/event-eatery/event-eatery.component";
 import { EventEntertainmentComponent } from "@modules/trips/components/events/event-entertainment/event-entertainment.component";
+import { SwipeDirective } from "@shared/swipe.directive";
 
 @NgModule({
   declarations: [
@@ -49,7 +50,9 @@ import { EventEntertainmentComponent } from "@modules/trips/components/events/ev
     IonRangeCalendarModule,
     CounterInputComponent,
     AdressModule,
+    SwipeDirective,
   ],
   providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class TripsPageModule {}
