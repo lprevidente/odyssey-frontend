@@ -8,7 +8,7 @@ export interface Place {
   title: string;
   resultType: string;
   address: Address;
-  position?: Position;
+  position: Position;
 }
 
 export interface Position {

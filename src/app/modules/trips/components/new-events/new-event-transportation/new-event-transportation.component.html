@@ -25,7 +25,7 @@
       </p>
 
       <form
-        (ngSubmit)="addPlace()"
+        (ngSubmit)="addActivity()"
         [formGroup]="form"
         class="form">
         <!-- Name -->
@@ -46,7 +46,7 @@
             class="text-sm font-medium mb-2 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
             Transportation type
           </p>
-          <ion-radio-group formControlName="type">
+          <ion-radio-group formControlName="means">
             @for (type of transportationTypes; track trackBy) {
               <ion-radio
                 mode="md"
@@ -68,8 +68,8 @@
           label="From"
           formControlName="from"
           placeholder="Ogigia Island"
-          [latitude]="52.36994"
-          [longitude]="4.90788">
+          [latitude]="place().position.lat"
+          [longitude]="place().position.lng">
         </app-poi-autocomplete>
 
         <!-- To -->
@@ -77,8 +77,8 @@
           label="To"
           formControlName="to"
           placeholder="Ithaca Island"
-          [latitude]="52.36994"
-          [longitude]="4.90788">
+          [latitude]="place().position.lat"
+          [longitude]="place().position.lng">
         </app-poi-autocomplete>
 
         <div class="grid grid-cols-2 items-center gap-4">
@@ -129,9 +129,9 @@
         <!-- Number of stops -->
         <ion-input
           *ngIf="
-            form.value.type === 'bus' ||
-            form.value.type === 'train' ||
-            form.value.type === 'flight'
+            form.value.means === 'bus' ||
+            form.value.means === 'train' ||
+            form.value.means === 'flight'
           "
           class="mt-4"
           mode="md"

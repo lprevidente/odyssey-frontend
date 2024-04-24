@@ -2,12 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  input,
   Input,
   OnInit,
   Output,
   signal,
 } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { Activity, NewTransportation } from "@modules/trips/models/activity";
+import { TripService } from "@modules/trips/services/trip.service";
+import { LoadingService } from "@core/services/loading.service";
+import { ToastSavingService } from "@core/services/toast-saving.service";
+import { Place } from "@modules/trips/models/address";
 
 @Component({
   selector: "app-new-event-transportation",
@@ -16,17 +22,26 @@ import { FormBuilder, Validators } from "@angular/forms";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewEventTransportationComponent implements OnInit {
+  public date = input.required<Date>();
+  public id = input.required<string>();
+  public place = input.required<Place>();
+
+  @Output()
+  public activityAdded = new EventEmitter<Activity>();
+
   protected readonly isModalOpen = signal<boolean>(false);
   protected presentingElement: unknown = null;
   protected form = this._formBuilder.group({
-    name: [null, Validators.required],
+    name: ["", Validators.required],
     notes: [null],
-    type: ["bus", Validators.required],
-    from: [null, Validators.required],
-    to: [null, Validators.required],
+    means: ["bus", Validators.required],
+    from: [{} as Place, Validators.required],
+    to: [{} as Place, Validators.required],
     departureTime: [null],
     arrivalTime: [null],
+    link: [null],
     number: [null],
+    expense: [null],
   });
 
   protected readonly transportationTypes = [
@@ -40,7 +55,12 @@ export class NewEventTransportationComponent implements OnInit {
   protected readonly trackBy: (index: number) => number = (index: number) =>
     index;
 
-  public constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _tripService: TripService,
+    private _loadingService: LoadingService,
+    private _toastSavingService: ToastSavingService
+  ) {}
 
   public ngOnInit(): void {
     this.presentingElement = document.querySelector(".ion-pages");
@@ -59,9 +79,28 @@ export class NewEventTransportationComponent implements OnInit {
     this.isModalOpen.set(value);
   }
 
-  protected addPlace(): void {
-    console.log(this.form.value);
+  protected addActivity(): void {
     if (this.form.invalid) return;
+    const activity = this.form.getRawValue() as NewTransportation;
+    this._loadingService.showLoading();
+    this._tripService
+      .addTransportationActivity(this.id(), this.date(), activity)
+      .subscribe({
+        next: activity => this.showToastAndClose(activity),
+        error: () => this.showErrorMessages(),
+      })
+      .add(() => this._loadingService.hideLoading());
+  }
+
+  protected showToastAndClose(activity: Activity): void {
+    this._toastSavingService.showSaved();
+    this.activityAdded.emit(activity);
     this.close();
+  }
+
+  protected showErrorMessages(): void {
+    this._toastSavingService.showErrorWithMessage(
+      "An error occurred while adding the eatery activity."
+    );
   }
 }

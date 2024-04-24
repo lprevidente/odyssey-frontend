@@ -5,8 +5,10 @@
   (swipeLeft)="showDeleteBtn()"
   (swipeRight)="hideDeleteBtn()">
   <div class="timeline-item-marker">
-    <ion-icon [name]="activity().mode + '-outline'"></ion-icon>
-    <p class="text-sm font-semibold">{{ activity().departureTime }}</p>
+    <ion-icon [name]="activity().means + '-outline'"></ion-icon>
+    <p class="text-sm font-semibold">
+      {{ activity().departureTime | date: "HH:mm" }}
+    </p>
     <div class="dot"></div>
   </div>
 
@@ -25,30 +27,42 @@
     <p class="description">{{ activity().notes }}</p>
     <div class="timeline-transportation">
       <div class="point">
-        <ion-button
-          fill="clear"
-          class="place">
-          {{ activity().from.title }}
-        </ion-button>
-        <p class="time">{{ activity().departureTime }}</p>
+        <div class="place text-center">
+          <ion-icon name="location-outline"></ion-icon>
+          <span class="overflow-ellipsis">
+            {{ activity().from.title }}
+          </span>
+        </div>
+        <p class="time">{{ activity().departureTime | date: "HH:mm" }}</p>
         <p class="line-dashed"></p>
       </div>
       <div class="point">
-        <ion-button
-          fill="clear"
-          class="place">
-          {{ activity().to.title }}
-        </ion-button>
-        <p class="time">{{ activity().arrivalTime }}</p>
+        <div class="place text-center">
+          <ion-icon name="location-outline"></ion-icon>
+          <span class="overflow-ellipsis">
+            {{ activity().to.title }}
+          </span>
+        </div>
+        <p class="time">{{ activity().arrivalTime | date: "HH:mm" }}</p>
       </div>
     </div>
 
-    @if (showDelete()) {
-      <ion-button
-        color="danger"
-        class="my-auto">
-        <ion-icon name="trash-outline"> </ion-icon>
-      </ion-button>
-    }
+    <div class="footer">
+      @if (activity().expense) {
+        <div class="expense">
+          <ion-icon name="wallet-outline"></ion-icon>
+          <span>{{ activity().expense | currency }} </span>
+        </div>
+      }
+    </div>
   </div>
+
+  @if (showDelete()) {
+    <ion-button
+      (click)="deleteActivity()"
+      color="danger"
+      class="my-auto">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-button>
+  }
 </div>

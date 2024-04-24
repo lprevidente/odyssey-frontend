@@ -5,18 +5,27 @@
   @for (activity of activities(); track trackByActivityId) {
     @switch (activity.type) {
       @case ("transportation") {
-        <app-event-transportation [activity]="activity">
+        <app-event-transportation
+          (deleteEvent)="deleteActivity($event)"
+          [activity]="activity">
         </app-event-transportation>
       }
       @case ("accommodation") {
-        <app-event-accommodation [activity]="activity">
+        <app-event-accommodation
+          (deleteEvent)="deleteActivity($event)"
+          [activity]="activity">
         </app-event-accommodation>
       }
       @case ("eatery") {
-        <app-event-eatery [activity]="activity"></app-event-eatery>
+        <app-event-eatery
+          (deleteEvent)="deleteActivity($event)"
+          [activity]="activity">
+        </app-event-eatery>
       }
       @case ("entertainment") {
-        <app-event-entertainment [activity]="activity">
+        <app-event-entertainment
+          (deleteEvent)="deleteActivity($event)"
+          [activity]="activity">
         </app-event-entertainment>
       }
     }
@@ -26,9 +35,18 @@
 
   <div style="height: 50px">
     <app-new-event
+      [place]="place()"
       (activityAdded)="addActivity($event)"
       [id]="id()"
       [date]="date()">
     </app-new-event>
   </div>
 </div>
+
+<ion-action-sheet
+  trigger="open-action-sheet"
+  header="Are you sure?"
+  [isOpen]="openActionSheet()"
+  (didDismiss)="actionResult($event)"
+  [buttons]="actionSheetButtons">
+</ion-action-sheet>

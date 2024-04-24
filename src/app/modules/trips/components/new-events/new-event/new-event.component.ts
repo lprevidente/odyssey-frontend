@@ -6,6 +6,7 @@ import {
   Output,
 } from "@angular/core";
 import { Activity } from "@modules/trips/models/activity";
+import { Place } from "@modules/trips/models/address";
 
 @Component({
   selector: "app-new-event",
@@ -16,6 +17,7 @@ import { Activity } from "@modules/trips/models/activity";
 export class NewEventComponent {
   public id = input.required<string>();
   public date = input.required<Date>();
+  public place = input.required<Place>();
 
   protected isTransportationOpen = false;
   protected isEateryOpen = false;
@@ -25,7 +27,7 @@ export class NewEventComponent {
   @Output()
   public activityAdded = new EventEmitter<Activity>();
 
-  protected propagate(event: Activity): void {
+  protected propagateAdd(event: Activity): void {
     this.activityAdded.emit(event);
   }
 }

@@ -16,7 +16,7 @@ export class AllTripsPage {
 
   protected readonly searchActive = signal<boolean>(false);
 
-  public constructor(private _tripService: TripService) {}
+  constructor(private _tripService: TripService) {}
 
   public ionViewWillEnter(): void {
     this._tripService.getTrips().subscribe(t => {

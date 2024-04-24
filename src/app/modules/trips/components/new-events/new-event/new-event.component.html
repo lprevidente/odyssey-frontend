@@ -19,21 +19,33 @@
 </ion-fab>
 
 <app-new-event-entertainment
-  (activityAdded)="propagate($event)"
+  (activityAdded)="propagateAdd($event)"
+  [place]="place()"
   [id]="id()"
   [date]="date()"
   [(openModel)]="isEntertainmentOpen">
 </app-new-event-entertainment>
 
-<app-new-event-transportation [(openModel)]="isTransportationOpen">
+<app-new-event-transportation
+  (activityAdded)="propagateAdd($event)"
+  [place]="place()"
+  [id]="id()"
+  [date]="date()"
+  [(openModel)]="isTransportationOpen">
 </app-new-event-transportation>
 
 <app-new-event-eatery
-  (activityAdded)="propagate($event)"
+  (activityAdded)="propagateAdd($event)"
+  [place]="place()"
   [id]="id()"
   [date]="date()"
   [(openModel)]="isEateryOpen">
 </app-new-event-eatery>
 
-<app-new-event-accommodation [(openModel)]="isAccommodationOpen">
+<app-new-event-accommodation
+  (activityAdded)="propagateAdd($event)"
+  [place]="place()"
+  [id]="id()"
+  [date]="date()"
+  [(openModel)]="isAccommodationOpen">
 </app-new-event-accommodation>

@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   input,
+  Output,
   signal,
 } from "@angular/core";
 import { Activity, Entertainment } from "@modules/trips/models/activity";
@@ -19,7 +21,13 @@ export class EventEntertainmentComponent {
 
   protected showDelete = signal<boolean>(false);
 
-  constructor() {}
+  @Output()
+  public deleteEvent = new EventEmitter<Activity>();
+
+  protected deleteActivity(): void {
+    this.deleteEvent.emit(this.activity());
+    this.hideDeleteBtn();
+  }
 
   protected showDeleteBtn(): void {
     this.showDelete.set(true);

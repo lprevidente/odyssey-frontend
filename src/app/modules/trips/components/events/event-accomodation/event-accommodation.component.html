@@ -20,21 +20,20 @@
     <div class="footer">
       <div class="place">
         <ion-icon name="location-outline"></ion-icon>
-        <ion-button
-          fill="clear"
-          class="place">
-          {{ activity().place.title }}
-        </ion-button>
+        <span class="overflow-ellipsis">{{ activity().place.title }}</span>
       </div>
-      <div class="expense">
-        <ion-icon name="wallet-outline"></ion-icon>
-        <span>{{ 200 | currency }} </span>
-      </div>
+      @if (activity().expense) {
+        <div class="expense">
+          <ion-icon name="wallet-outline"></ion-icon>
+          <span>{{ activity().expense | currency }} </span>
+        </div>
+      }
     </div>
   </div>
 
   @if (showDelete()) {
     <ion-button
+      (click)="deleteActivity()"
       color="danger"
       class="my-auto">
       <ion-icon name="trash-outline"></ion-icon>

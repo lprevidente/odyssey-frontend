@@ -9,8 +9,10 @@ import { DateRange, formatDateRange } from "@modules/trips/models/date-range";
 import { People } from "@modules/trips/models/people";
 import {
   Activity,
+  NewAccommodation,
   NewEatery,
   NewEntertainment,
+  NewTransportation,
 } from "@modules/trips/models/activity";
 import { format } from "date-fns";
 
@@ -30,6 +32,7 @@ export class TripService {
     return this._httpClient.get<TripInfo[]>(`${this._endpoint}`);
   }
 
+  @TransformDate
   public getTrip(id: string): Observable<TripDetails> {
     return this._httpClient.get<TripDetails>(`${this._endpoint}/${id}`);
   }
@@ -56,6 +59,17 @@ export class TripService {
     return this._httpClient.delete<void>(`${this._endpoint}/${id}`);
   }
 
+  public deleteActivity(
+    id: string,
+    date: Date,
+    activityId: string
+  ): Observable<void> {
+    const dateStr = format(date, "yyyy-MM-dd");
+    return this._httpClient.delete<void>(
+      `${this._endpoint}/${id}/activities/${dateStr}/${activityId}`
+    );
+  }
+
   public addEntertainmentActivity(
     id: string,
     date: Date,
@@ -76,6 +90,30 @@ export class TripService {
     const dateStr = format(date, "yyyy-MM-dd");
     return this._httpClient.post<Activity>(
       `${this._endpoint}/${id}/activities/${dateStr}?type=eatery`,
+      activity
+    );
+  }
+
+  public addTransportationActivity(
+    id: string,
+    date: Date,
+    activity: NewTransportation
+  ): Observable<Activity> {
+    const dateStr = format(date, "yyyy-MM-dd");
+    return this._httpClient.post<Activity>(
+      `${this._endpoint}/${id}/activities/${dateStr}?type=transportation`,
+      activity
+    );
+  }
+
+  public addAccommodationActivity(
+    id: string,
+    date: Date,
+    activity: NewAccommodation
+  ): Observable<Activity> {
+    const dateStr = format(date, "yyyy-MM-dd");
+    return this._httpClient.post<Activity>(
+      `${this._endpoint}/${id}/activities/${dateStr}?type=accommodation`,
       activity
     );
   }

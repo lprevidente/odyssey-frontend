@@ -25,6 +25,7 @@ import { Place } from "@modules/trips/models/address";
 export class NewEventEntertainmentComponent implements OnInit {
   public date = input.required<Date>();
   public id = input.required<string>();
+  public place = input.required<Place>();
 
   protected readonly isModalOpen = signal<boolean>(false);
   protected presentingElement: unknown = null;
@@ -35,6 +36,7 @@ export class NewEventEntertainmentComponent implements OnInit {
     reservation: [false],
     time: [null],
     link: [""],
+    expense: [null],
   });
 
   @Output()
@@ -64,7 +66,7 @@ export class NewEventEntertainmentComponent implements OnInit {
     this.isModalOpen.set(value);
   }
 
-  protected addPlace(): void {
+  protected addActivity(): void {
     if (this.form.invalid) return;
 
     const activity = this.form.getRawValue() as NewEntertainment;

@@ -15,6 +15,7 @@ export interface TripInfo {
 export interface TripDetails {
   id: string;
   name: string;
+  place: Place;
   dateRange: DateRange;
   people: People;
   activities: { [date: string]: Activity[] };

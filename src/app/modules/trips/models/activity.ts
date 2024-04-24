@@ -12,6 +12,7 @@ export type Activity = {
   notes: string | null;
   attachments: Attachment[];
   link: string | null;
+  expense: number | null;
 } & (
   | ({ type: "transportation" } & Transportation)
   | ({ type: "eatery" } & Eatery)
@@ -26,7 +27,7 @@ export interface Transportation {
   to: Place;
   departureTime: string | null;
   arrivalTime: string | null;
-  mode: TransportationType;
+  means: TransportationType;
   number: string | null;
 }
 
@@ -40,8 +41,8 @@ export interface Eatery {
 
 export interface Accommodation {
   place: Place;
-  checkIn: string;
-  checkOut: string;
+  checkIn: string | null;
+  checkOut: string | null;
 }
 
 export interface Entertainment {
@@ -58,5 +59,8 @@ export type NewEatery = Omit<Activity, "id" | "type" | "attachments"> & Eatery;
 export type NewAccommodation = Omit<Activity, "id" | "type" | "attachments"> &
   Accommodation;
 
-export type NewTransportation = Omit<Activity, "id" | "type" | "attachments"> &
+export type NewTransportation = Omit<
+  Activity,
+  "id" | "type" | "attachments" | "link"
+> &
   Transportation;
