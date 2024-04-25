@@ -4,7 +4,7 @@ import { BASE_PATH } from "../../../app.module";
 import { Observable } from "rxjs";
 import { NewTrip } from "@modules/trips/models/new-trip";
 import { TripDetails, TripInfo } from "@modules/trips/models/tripInfo";
-import { TransformDate } from "@core/utils/date.utils";
+import { TransformDate } from "@core/utils/date";
 import { DateRange, formatDateRange } from "@modules/trips/models/date-range";
 import { People } from "@modules/trips/models/people";
 import {

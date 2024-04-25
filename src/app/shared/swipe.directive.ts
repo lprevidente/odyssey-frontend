@@ -14,17 +14,13 @@ export class SwipeDirective {
   constructor() {}
 
   @HostListener("touchstart", ["$event"])
-  public _onSwipeStart(event: TouchEvent): void {
-    this._onSwipe(event, "start");
+  public onSwipeStart(event: TouchEvent): void {
+    this._swipe(event, "start");
   }
 
   @HostListener("touchend", ["$event"])
-  public _onSwipeEnd(event: TouchEvent): void {
-    this._onSwipe(event, "end");
-  }
-
-  private _onSwipe(e: TouchEvent, when: string): void {
-    this._swipe(e, when);
+  public onSwipeEnd(event: TouchEvent): void {
+    this._swipe(event, "end");
   }
 
   private _swipe(e: TouchEvent, when: string): void {

@@ -21,6 +21,7 @@ export class TimelineComponent {
   public id = input.required<string>();
   public date = input.required<Date>();
   public place = input.required<Place>();
+
   protected readonly trackByActivityId = trackByActivityId;
 
   protected activities = signal<Activity[]>([]);
@@ -31,6 +32,18 @@ export class TimelineComponent {
     { text: "Delete", role: "destructive", data: { action: "delete" } },
     { text: "Cancel", role: "cancel", data: { action: "cancel" } },
   ];
+
+  protected readonly isModalOpen = signal<{
+    accommodation: boolean;
+    transportation: boolean;
+    entertainment: boolean;
+    eatery: boolean;
+  }>({
+    accommodation: false,
+    transportation: false,
+    entertainment: false,
+    eatery: false,
+  });
 
   constructor(
     private _loadingService: LoadingService,
@@ -52,6 +65,15 @@ export class TimelineComponent {
     this.openActionSheet.set(true);
   }
 
+  protected newActivity(type: string): void {
+    this.activityToUpdate.set(null);
+    this._openModal(type);
+  }
+
+  private _openModal(type: string): void {
+    this.isModalOpen.update(modal => ({ ...modal, [type]: true }));
+  }
+
   protected actionResult(event: CustomEvent): void {
     if (event.detail.role !== "destructive" || !this.activityToDelete) return;
     this.openActionSheet.set(false);
@@ -66,11 +88,18 @@ export class TimelineComponent {
       .add(() => this._loadingService.hideLoading());
   }
 
-  public removeActivity(activityId: string): void {
+  protected removeActivity(activityId: string): void {
     this.activities.update(activities =>
       activities.filter(a => a.id !== activityId)
     );
     this._toastSavingService.showSaved();
     this.activityToDelete = null;
+  }
+
+  protected readonly activityToUpdate = signal<Activity | null>(null);
+
+  protected updateActivity(activity: Activity): void {
+    this.activityToUpdate.set(activity);
+    this._openModal(activity.type);
   }
 }

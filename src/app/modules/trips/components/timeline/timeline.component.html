@@ -1,30 +1,35 @@
 <ion-list-header>
   <ion-label>{{ date() | date: "dd MMM" }}</ion-label>
 </ion-list-header>
+
 <div class="timeline">
   @for (activity of activities(); track trackByActivityId) {
     @switch (activity.type) {
       @case ("transportation") {
         <app-event-transportation
-          (deleteEvent)="deleteActivity($event)"
+          (updateActivity)="updateActivity(activity)"
+          (deleteActivity)="deleteActivity(activity)"
           [activity]="activity">
         </app-event-transportation>
       }
       @case ("accommodation") {
         <app-event-accommodation
-          (deleteEvent)="deleteActivity($event)"
+          (updateActivity)="updateActivity(activity)"
+          (deleteActivity)="deleteActivity(activity)"
           [activity]="activity">
         </app-event-accommodation>
       }
       @case ("eatery") {
         <app-event-eatery
-          (deleteEvent)="deleteActivity($event)"
+          (updateActivity)="updateActivity(activity)"
+          (deleteActivity)="deleteActivity(activity)"
           [activity]="activity">
         </app-event-eatery>
       }
       @case ("entertainment") {
         <app-event-entertainment
-          (deleteEvent)="deleteActivity($event)"
+          (updateActivity)="updateActivity(activity)"
+          (deleteActivity)="deleteActivity(activity)"
           [activity]="activity">
         </app-event-entertainment>
       }
@@ -35,16 +40,49 @@
 
   <div style="height: 50px">
     <app-new-event
-      [place]="place()"
-      (activityAdded)="addActivity($event)"
-      [id]="id()"
-      [date]="date()">
+      (openModel)="newActivity($event)"
+      [id]="id()">
     </app-new-event>
   </div>
 </div>
 
+<app-new-event-entertainment
+  (add)="addActivity($event)"
+  [activity]="activityToUpdate()!"
+  [place]="place()"
+  [id]="id()"
+  [date]="date()"
+  [(openModel)]="isModalOpen().entertainment">
+</app-new-event-entertainment>
+
+<app-new-event-transportation
+  (add)="addActivity($event)"
+  [activity]="activityToUpdate()!"
+  [place]="place()"
+  [id]="id()"
+  [date]="date()"
+  [(openModel)]="isModalOpen().transportation">
+</app-new-event-transportation>
+
+<app-new-event-eatery
+  (add)="addActivity($event)"
+  [activity]="activityToUpdate()!"
+  [place]="place()"
+  [id]="id()"
+  [date]="date()"
+  [(openModel)]="isModalOpen().eatery">
+</app-new-event-eatery>
+
+<app-new-event-accommodation
+  (add)="addActivity($event)"
+  [activity]="activityToUpdate()!"
+  [place]="place()"
+  [id]="id()"
+  [date]="date()"
+  [(openModel)]="isModalOpen().accommodation">
+</app-new-event-accommodation>
+
 <ion-action-sheet
-  trigger="open-action-sheet"
   header="Are you sure?"
   [isOpen]="openActionSheet()"
   (didDismiss)="actionResult($event)"

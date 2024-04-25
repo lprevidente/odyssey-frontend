@@ -128,11 +128,7 @@
 
         <!-- Number of stops -->
         <ion-input
-          *ngIf="
-            form.value.means === 'bus' ||
-            form.value.means === 'train' ||
-            form.value.means === 'flight'
-          "
+          *ngIf="['bus', 'train', 'flight'].includes(form.value['means'])"
           class="mt-4"
           mode="md"
           fill="outline"

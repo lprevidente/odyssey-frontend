@@ -3,39 +3,47 @@
   [class.show-delete-icon]="showDelete()"
   (swipeLeft)="showDeleteBtn()"
   (swipeRight)="hideDeleteBtn()"
-  class="timeline-item">
-  <div class="timeline-item-marker">
-    <ion-icon name="restaurant-outline"></ion-icon>
-    <p class="text-sm font-semibold">{{ activity().time }}</p>
-    <div class="dot"></div>
-  </div>
-  <div class="timeline-item-content">
-    <div class="header">
-      <span class="title">
-        {{ activity().name }}
-      </span>
+  class="timeline-container">
+  <div class="timeline-item">
+    <div class="timeline-item-marker">
+      <ion-icon name="restaurant-outline"></ion-icon>
+      <p class="text-sm font-semibold">{{ activity().time }}</p>
+      <div class="dot"></div>
     </div>
-    <p class="description">{{ activity().notes }}</p>
-    <div class="footer">
-      <div class="place">
-        <ion-icon name="location-outline"></ion-icon>
-        <span class="overflow-ellipsis">{{ activity().place.title }}</span>
+    <div class="timeline-item-content">
+      <div class="header">
+        <span class="title">
+          {{ activity().name }}
+        </span>
       </div>
-      @if (activity().expense) {
-        <div class="expense">
-          <ion-icon name="wallet-outline"></ion-icon>
-          <span>{{ activity().expense | currency }} </span>
+      <p class="description">{{ activity().notes }}</p>
+      <div class="footer">
+        <div class="place">
+          <ion-icon name="location-outline"></ion-icon>
+          <span class="overflow-ellipsis">{{ activity().place.title }}</span>
         </div>
-      }
+        @if (activity().expense) {
+          <div class="expense">
+            <ion-icon name="wallet-outline"></ion-icon>
+            <span>{{ activity().expense | currency }} </span>
+          </div>
+        }
+      </div>
     </div>
   </div>
-
-  @if (showDelete()) {
+  <div>
     <ion-button
-      (click)="deleteActivity()"
+      (click)="delete()"
       color="danger"
       class="my-auto">
-      <ion-icon name="trash-outline"> </ion-icon>
+      <ion-icon name="trash-outline"></ion-icon>
     </ion-button>
-  }
+
+    <ion-button
+      (click)="update()"
+      color="warning"
+      class="my-auto">
+      <ion-icon name="pencil-outline"></ion-icon>
+    </ion-button>
+  </div>
 </div>

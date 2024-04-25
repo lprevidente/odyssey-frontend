@@ -57,7 +57,7 @@
           Have you booked tickets?
         </ion-toggle>
 
-        @if (form.controls.reservation.valueChanges | async) {
+        @if (form.controls["reservation"].value) {
           <div class="mt-2 flex flex-row items-center">
             <label
               class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-grow">
@@ -65,15 +65,15 @@
             </label>
             <ion-datetime-button
               mode="md"
-              datetime="fromTime">
+              datetime="time">
             </ion-datetime-button>
 
             <ion-modal [keepContentsMounted]="true">
               <ng-template>
                 <ion-datetime
                   presentation="time"
-                  formControlName="reservationTime"
-                  id="fromTime">
+                  formControlName="time"
+                  id="time">
                 </ion-datetime>
               </ng-template>
             </ion-modal>

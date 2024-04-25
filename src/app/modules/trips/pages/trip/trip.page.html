@@ -1,77 +1,79 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/trips"></ion-back-button>
-    </ion-buttons>
-    @if (loading()) {
-    <ion-progress-bar type="indeterminate"></ion-progress-bar>
-    } @else {
-    <ion-title>{{ trip().name }}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon name="share-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    }
-  </ion-toolbar>
-</ion-header>
-
-@if (!loading()) {
-<ion-content
-  class="ion-padding"
-  [fullscreen]="true">
-  <ion-header collapse="condense">
+<div class="ion-page">
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large">{{ trip().name }}</ion-title>
-
-      <ion-chip (click)="isEditRangeOpen = true">
-        <ion-icon name="calendar-outline"></ion-icon>
-        <ion-label>{{ getRange() }}</ion-label>
-      </ion-chip>
-
-      <ion-chip (click)="isEditGuestsOpen = true">
-        <ion-icon name="people-outline"></ion-icon>
-        <ion-label>{{ getPeople() }} guest</ion-label>
-      </ion-chip>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/trips"></ion-back-button>
+      </ion-buttons>
+      @if (loading()) {
+      <ion-progress-bar type="indeterminate"></ion-progress-bar>
+      } @else {
+      <ion-title>{{ trip().name }}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon name="share-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      }
     </ion-toolbar>
   </ion-header>
 
-  @for (date of dates(); track trackByDate) {
-  <app-timeline
-    [place]="trip().place"
+  @if (!loading()) {
+  <ion-content
+    class="ion-padding"
+    [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">{{ trip().name }}</ion-title>
+
+        <ion-chip (click)="isEditRangeOpen = true">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-label>{{ getRange() }}</ion-label>
+        </ion-chip>
+
+        <ion-chip (click)="isEditGuestsOpen = true">
+          <ion-icon name="people-outline"></ion-icon>
+          <ion-label>{{ getPeople() }} guest</ion-label>
+        </ion-chip>
+      </ion-toolbar>
+    </ion-header>
+
+    @for (date of dates(); track trackByDate) {
+    <app-timeline
+      [place]="trip().place"
+      [id]="trip().id"
+      [activities]="getActivities(date)"
+      [date]="date">
+    </app-timeline>
+    }
+
+    <ion-button
+      color="danger"
+      fill="clear"
+      id="open-action-sheet"
+      class="underline mt-2">
+      <span>Delete Trip</span>
+    </ion-button>
+  </ion-content>
+
+  <app-edit-date-range
+    (dateRangeChange)="updateDateRange($event)"
+    [dateRange]="trip().dateRange"
     [id]="trip().id"
-    [activities]="getActivities(date)"
-    [date]="date">
-  </app-timeline>
+    [(openModel)]="isEditRangeOpen">
+  </app-edit-date-range>
+
+  <app-edit-guests
+    (guestsChange)="updatePeople($event)"
+    [guests]="trip().people"
+    [id]="trip().id"
+    [(openModel)]="isEditGuestsOpen">
+  </app-edit-guests>
+
+  <ion-action-sheet
+    trigger="open-action-sheet"
+    header="Are you sure?"
+    (didDismiss)="actionResult($event)"
+    [buttons]="actionSheetButtons">
+  </ion-action-sheet>
   }
-
-  <ion-button
-    color="danger"
-    fill="clear"
-    id="open-action-sheet"
-    class="underline mt-2">
-    <span>Delete Trip</span>
-  </ion-button>
-</ion-content>
-
-<app-edit-date-range
-  (dateRangeChange)="updateDateRange($event)"
-  [dateRange]="trip().dateRange"
-  [id]="trip().id"
-  [(openModel)]="isEditRangeOpen">
-</app-edit-date-range>
-
-<app-edit-guests
-  (guestsChange)="updatePeople($event)"
-  [guests]="trip().people"
-  [id]="trip().id"
-  [(openModel)]="isEditGuestsOpen">
-</app-edit-guests>
-
-<ion-action-sheet
-  trigger="open-action-sheet"
-  header="Are you sure?"
-  (didDismiss)="actionResult($event)"
-  [buttons]="actionSheetButtons">
-</ion-action-sheet>
-}
+</div>

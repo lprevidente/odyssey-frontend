@@ -16,7 +16,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AuthInterceptor } from "@core/interceptors/auth.interceptor";
 import { RefreshTokenInterceptor } from "@core/interceptors/refresh-token.interceptor";
 import { MeService } from "@core/services/me.service";
-import { Observable } from "rxjs";
+import { Observable, timeout } from "rxjs";
 import { catchError } from "rxjs/operators";
 
 export const BASE_PATH = new InjectionToken<string>("Base path for the API");
@@ -24,6 +24,7 @@ export const BASE_PATH = new InjectionToken<string>("Base path for the API");
 export function initApp(meService: MeService, router: Router) {
   return (): Observable<void> =>
     meService.getMe().pipe(
+      timeout(5000),
       catchError(err => {
         router.navigateByUrl("/error");
         throw err;

@@ -41,7 +41,7 @@ export class EditGuestsComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.presentingElement = document.querySelector(".ion-pages");
+    this.presentingElement = document.querySelector(".ion-page");
   }
 
   protected close(): void {

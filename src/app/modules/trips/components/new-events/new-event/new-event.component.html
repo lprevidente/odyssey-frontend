@@ -3,49 +3,17 @@
     <ion-icon name="add-outline"></ion-icon>
   </ion-fab-button>
   <ion-fab-list side="end">
-    <ion-fab-button (click)="isEntertainmentOpen = true">
+    <ion-fab-button (click)="openModel.emit('entertainment')">
       <ion-icon name="eye-outline"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="isEateryOpen = true">
+    <ion-fab-button (click)="openModel.emit('eatery')">
       <ion-icon name="restaurant-outline"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="isAccommodationOpen = true">
+    <ion-fab-button (click)="openModel.emit('accommodation')">
       <ion-icon name="bed-outline"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="isTransportationOpen = true">
+    <ion-fab-button (click)="openModel.emit('transportation')">
       <ion-icon name="bus-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab-list>
 </ion-fab>
-
-<app-new-event-entertainment
-  (activityAdded)="propagateAdd($event)"
-  [place]="place()"
-  [id]="id()"
-  [date]="date()"
-  [(openModel)]="isEntertainmentOpen">
-</app-new-event-entertainment>
-
-<app-new-event-transportation
-  (activityAdded)="propagateAdd($event)"
-  [place]="place()"
-  [id]="id()"
-  [date]="date()"
-  [(openModel)]="isTransportationOpen">
-</app-new-event-transportation>
-
-<app-new-event-eatery
-  (activityAdded)="propagateAdd($event)"
-  [place]="place()"
-  [id]="id()"
-  [date]="date()"
-  [(openModel)]="isEateryOpen">
-</app-new-event-eatery>
-
-<app-new-event-accommodation
-  (activityAdded)="propagateAdd($event)"
-  [place]="place()"
-  [id]="id()"
-  [date]="date()"
-  [(openModel)]="isAccommodationOpen">
-</app-new-event-accommodation>

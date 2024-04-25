@@ -50,6 +50,22 @@
   color: var(--ion-color-medium-tint);
 }
 
+.timeline-container {
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+
+  &.show-delete-icon {
+    transform: translateX(-140px);
+  }
+
+  > div:nth-child(2) {
+    position: absolute;
+    right: -140px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
 .timeline {
   margin-top: 15px;
   display: flex;
@@ -64,11 +80,6 @@
     gap: 12px;
     align-items: flex-start;
     position: relative;
-    transition: transform 0.3s ease-in-out;
-
-    &.show-delete-icon {
-      transform: translateX(-10px); // Adjust this value as needed
-    }
 
     .timeline-item-marker {
       min-width: 42px;
@@ -78,7 +89,7 @@
       align-self: stretch;
 
       ion-icon {
-        font-size: 20px;
+        font-size: 30px;
         margin-bottom: 5px;
       }
 
@@ -181,19 +192,15 @@
   font-weight: 400;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  gap: 5px;
 }
 
 .place {
-  text-overflow: ellipsis;
-
   span {
-    width: 150px;
+    font-size: 12px;
     display: block;
     color: var(--ion-color-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     text-decoration: underline;
+    text-wrap: wrap;
   }
 }

@@ -1,12 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  input,
-  Output,
-  signal,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 import { Accommodation, Activity } from "@modules/trips/models/activity";
+import { EventComponent } from "@modules/trips/components/events/event.component";
 
 @Component({
   selector: "app-event-accommodation",
@@ -14,25 +8,8 @@ import { Accommodation, Activity } from "@modules/trips/models/activity";
   styleUrls: ["./event-accommodation.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EventAccommodationComponent {
+export class EventAccommodationComponent extends EventComponent {
   public activity = input.required<
     Activity & { type: "accommodation" } & Accommodation
   >();
-  protected showDelete = signal<boolean>(false);
-
-  @Output()
-  public deleteEvent = new EventEmitter<Activity>();
-
-  protected deleteActivity(): void {
-    this.deleteEvent.emit(this.activity());
-    this.hideDeleteBtn();
-  }
-
-  protected showDeleteBtn(): void {
-    this.showDelete.set(true);
-  }
-
-  protected hideDeleteBtn(): void {
-    this.showDelete.set(false);
-  }
 }

@@ -50,13 +50,13 @@
 
         <!-- Reservation -->
         <ion-toggle
-          formControlName="booked"
+          formControlName="reservation"
           class="w-full text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           mode="md">
           Do you have a reservation?
         </ion-toggle>
 
-        @if (form.value.reservation) {
+        @if (form.controls["reservation"].value) {
           <div class="mt-2 flex flex-row items-center">
             <label
               class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-grow">

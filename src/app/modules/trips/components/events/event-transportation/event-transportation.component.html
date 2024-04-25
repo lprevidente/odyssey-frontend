@@ -1,68 +1,77 @@
 <div
-  class="timeline-item"
   appSwipe
   [class.show-delete-icon]="showDelete()"
   (swipeLeft)="showDeleteBtn()"
-  (swipeRight)="hideDeleteBtn()">
-  <div class="timeline-item-marker">
-    <ion-icon [name]="activity().means + '-outline'"></ion-icon>
-    <p class="text-sm font-semibold">
-      {{ activity().departureTime | date: "HH:mm" }}
-    </p>
-    <div class="dot"></div>
+  (swipeRight)="hideDeleteBtn()"
+  class="timeline-container">
+  <div class="timeline-item">
+    <div class="timeline-item-marker">
+      <ion-icon [name]="activity().means + '-outline'"></ion-icon>
+      <p class="text-sm font-semibold">
+        {{ activity().departureTime | date: "HH:mm" }}
+      </p>
+      <div class="dot"></div>
+    </div>
+
+    <div class="timeline-item-content">
+      <div class="header">
+        <span class="title">{{ activity().name }}</span>
+        <div>
+          <ion-button
+            fill="clear"
+            class="ticket">
+            <ion-icon name="ticket-outline"></ion-icon>
+            <span>{{ activity().number }}</span>
+          </ion-button>
+        </div>
+      </div>
+      <p class="description">{{ activity().notes }}</p>
+      <div class="timeline-transportation">
+        <div class="point">
+          <div class="place text-center">
+            <ion-icon name="location-outline"></ion-icon>
+            <span class="overflow-ellipsis">
+              {{ activity().from.title }}
+            </span>
+          </div>
+          <p class="time">{{ activity().departureTime | date: "HH:mm" }}</p>
+          <p class="line-dashed"></p>
+        </div>
+        <div class="point">
+          <div class="place text-center">
+            <ion-icon name="location-outline"></ion-icon>
+            <span class="overflow-ellipsis">
+              {{ activity().to.title }}
+            </span>
+          </div>
+          <p class="time">{{ activity().arrivalTime | date: "HH:mm" }}</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        @if (activity().expense) {
+          <div class="expense">
+            <ion-icon name="wallet-outline"></ion-icon>
+            <span>{{ activity().expense | currency }} </span>
+          </div>
+        }
+      </div>
+    </div>
   </div>
 
-  <div class="timeline-item-content">
-    <div class="header">
-      <span class="title">{{ activity().name }}</span>
-      <div>
-        <ion-button
-          fill="clear"
-          class="ticket">
-          <ion-icon name="ticket-outline"></ion-icon>
-          <span>{{ activity().number }}</span>
-        </ion-button>
-      </div>
-    </div>
-    <p class="description">{{ activity().notes }}</p>
-    <div class="timeline-transportation">
-      <div class="point">
-        <div class="place text-center">
-          <ion-icon name="location-outline"></ion-icon>
-          <span class="overflow-ellipsis">
-            {{ activity().from.title }}
-          </span>
-        </div>
-        <p class="time">{{ activity().departureTime | date: "HH:mm" }}</p>
-        <p class="line-dashed"></p>
-      </div>
-      <div class="point">
-        <div class="place text-center">
-          <ion-icon name="location-outline"></ion-icon>
-          <span class="overflow-ellipsis">
-            {{ activity().to.title }}
-          </span>
-        </div>
-        <p class="time">{{ activity().arrivalTime | date: "HH:mm" }}</p>
-      </div>
-    </div>
-
-    <div class="footer">
-      @if (activity().expense) {
-        <div class="expense">
-          <ion-icon name="wallet-outline"></ion-icon>
-          <span>{{ activity().expense | currency }} </span>
-        </div>
-      }
-    </div>
-  </div>
-
-  @if (showDelete()) {
+  <div>
     <ion-button
-      (click)="deleteActivity()"
+      (click)="delete()"
       color="danger"
       class="my-auto">
       <ion-icon name="trash-outline"></ion-icon>
     </ion-button>
-  }
+
+    <ion-button
+      (click)="update()"
+      color="warning"
+      class="my-auto">
+      <ion-icon name="pencil-outline"></ion-icon>
+    </ion-button>
+  </div>
 </div>
