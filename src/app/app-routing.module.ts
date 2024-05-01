@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { isAuthenticatedGuard } from "@core/guards/auth-guard.service";
 import { canActivateNoAuthGuard } from "@core/guards/no-auth-guard.service";
 import { isVerifiedGuard } from "@core/guards/verification-guard.service";
+import { ErrorPage } from "@modules/error/error.page";
 
 const routes: Routes = [
   {
@@ -12,8 +13,7 @@ const routes: Routes = [
   },
   {
     path: "error",
-    loadChildren: () =>
-      import("./modules/error/error.module").then(m => m.ErrorPageModule),
+    component: ErrorPage,
   },
   {
     path: "tabs",
@@ -30,11 +30,6 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: "tabs",
-  },
-  {
-    path: "error",
-    loadChildren: () =>
-      import("./modules/error/error.module").then(m => m.ErrorPageModule),
   },
 ];
 

@@ -1,13 +1,27 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>error</ion-title>
+    <ion-title>Error</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content
+  class="ion-padding"
+  [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">error</ion-title>
+      <ion-title size="large">Error</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div class="flex h-1/2 align-middle">
+    <div class="m-auto text-red-700 text-center">
+      <p class="text-3xl align-middle font-bold">
+        <ion-icon
+          class="align-middle"
+          name="alert-circle-outline"></ion-icon>
+        Ops!
+      </p>
+      <p>An error occurred while loading the application</p>
+    </div>
+  </div>
 </ion-content>

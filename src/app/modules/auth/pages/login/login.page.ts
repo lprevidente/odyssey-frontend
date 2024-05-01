@@ -25,7 +25,7 @@ export class LoginPage {
   }>;
   protected showPassword = false;
 
-  public constructor(
+  constructor(
     private _formBuilder: FormBuilder,
     private _authService: AuthService,
     private _meService: MeService,
