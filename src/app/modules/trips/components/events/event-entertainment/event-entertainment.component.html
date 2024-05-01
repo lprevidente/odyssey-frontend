@@ -7,7 +7,9 @@
   <div class="timeline-item">
     <div class="timeline-item-marker">
       <ion-icon name="eye-outline"></ion-icon>
-      <p class="text-sm font-semibold">{{ activity().time }}</p>
+      <p class="text-sm font-semibold">
+        {{ activity().time | date: "HH:mm" }}
+      </p>
       <div class="dot"></div>
     </div>
 

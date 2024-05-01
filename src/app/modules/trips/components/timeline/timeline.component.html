@@ -7,28 +7,28 @@
     @switch (activity.type) {
       @case ("transportation") {
         <app-event-transportation
-          (updateActivity)="updateActivity(activity)"
+          (updateActivity)="openModalActivity(activity)"
           (deleteActivity)="deleteActivity(activity)"
           [activity]="activity">
         </app-event-transportation>
       }
       @case ("accommodation") {
         <app-event-accommodation
-          (updateActivity)="updateActivity(activity)"
+          (updateActivity)="openModalActivity(activity)"
           (deleteActivity)="deleteActivity(activity)"
           [activity]="activity">
         </app-event-accommodation>
       }
       @case ("eatery") {
         <app-event-eatery
-          (updateActivity)="updateActivity(activity)"
+          (updateActivity)="openModalActivity(activity)"
           (deleteActivity)="deleteActivity(activity)"
           [activity]="activity">
         </app-event-eatery>
       }
       @case ("entertainment") {
         <app-event-entertainment
-          (updateActivity)="updateActivity(activity)"
+          (updateActivity)="openModalActivity(activity)"
           (deleteActivity)="deleteActivity(activity)"
           [activity]="activity">
         </app-event-entertainment>
@@ -48,36 +48,40 @@
 
 <app-new-event-entertainment
   (add)="addActivity($event)"
+  (update)="updateActivity($event)"
   [activity]="activityToUpdate()!"
   [place]="place()"
-  [id]="id()"
+  [tripId]="id()"
   [date]="date()"
   [(openModel)]="isModalOpen().entertainment">
 </app-new-event-entertainment>
 
 <app-new-event-transportation
   (add)="addActivity($event)"
+  (update)="updateActivity($event)"
   [activity]="activityToUpdate()!"
   [place]="place()"
-  [id]="id()"
+  [tripId]="id()"
   [date]="date()"
   [(openModel)]="isModalOpen().transportation">
 </app-new-event-transportation>
 
 <app-new-event-eatery
   (add)="addActivity($event)"
+  (update)="updateActivity($event)"
   [activity]="activityToUpdate()!"
   [place]="place()"
-  [id]="id()"
+  [tripId]="id()"
   [date]="date()"
   [(openModel)]="isModalOpen().eatery">
 </app-new-event-eatery>
 
 <app-new-event-accommodation
   (add)="addActivity($event)"
+  (update)="updateActivity($event)"
   [activity]="activityToUpdate()!"
   [place]="place()"
-  [id]="id()"
+  [tripId]="id()"
   [date]="date()"
   [(openModel)]="isModalOpen().accommodation">
 </app-new-event-accommodation>

@@ -7,7 +7,9 @@
   <div class="timeline-item">
     <div class="timeline-item-marker">
       <ion-icon name="bed-outline"></ion-icon>
-      <p class="text-sm font-semibold">{{ activity().checkIn }}</p>
+      <p class="text-sm font-semibold">
+        {{ activity().checkIn | date: "HH:mm" }}
+      </p>
       <div class="dot"></div>
     </div>
 

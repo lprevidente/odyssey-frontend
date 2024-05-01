@@ -98,8 +98,16 @@ export class TimelineComponent {
 
   protected readonly activityToUpdate = signal<Activity | null>(null);
 
-  protected updateActivity(activity: Activity): void {
+  protected openModalActivity(activity: Activity): void {
     this.activityToUpdate.set(activity);
     this._openModal(activity.type);
+  }
+
+  protected updateActivity(activity: Activity): void {
+    console.log("Activity to update", activity);
+    this.activities.update(activities =>
+      activities.map(a => (a.id === activity.id ? activity : a))
+    );
+    this._toastSavingService.showSaved();
   }
 }

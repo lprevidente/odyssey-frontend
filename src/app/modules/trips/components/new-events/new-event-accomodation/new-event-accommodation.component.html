@@ -1,5 +1,4 @@
 <ion-modal
-  [presentingElement]="presentingElement"
   [isOpen]="isModalOpen()"
   (willDismiss)="close()">
   <ng-template>
@@ -25,7 +24,7 @@
       </p>
 
       <form
-        (ngSubmit)="addActivity()"
+        (ngSubmit)="saveActivity()"
         [formGroup]="form"
         class="form">
         <!-- Name -->
@@ -122,7 +121,7 @@
           expand="block"
           class="mt-4"
           color="primary">
-          Add
+          {{ isUpdating ? "Update" : "Add" }}
         </ion-button>
       </form>
     </ion-content>

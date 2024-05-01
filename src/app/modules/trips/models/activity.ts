@@ -20,6 +20,12 @@ export type Activity = {
   | ({ type: "entertainment" } & Entertainment)
 );
 
+export type ActivityType =
+  | "transportation"
+  | "eatery"
+  | "accommodation"
+  | "entertainment";
+
 export const trackByActivityId = (_: number, item: Activity): string => item.id;
 
 export interface Transportation {

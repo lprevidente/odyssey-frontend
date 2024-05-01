@@ -89,8 +89,9 @@
       align-self: stretch;
 
       ion-icon {
-        font-size: 30px;
+        font-size: 25px !important;
         margin-bottom: 5px;
+        min-height: 25px;
       }
 
       .dot {
