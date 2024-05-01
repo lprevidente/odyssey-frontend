@@ -10,6 +10,7 @@ import { Place } from "@modules/trips/models/address";
 import { LoadingService } from "@core/services/loading.service";
 import { TripService } from "@modules/trips/services/trip.service";
 import { ToastSavingService } from "@core/services/toast-saving.service";
+import { ActivityService } from "@modules/trips/services/activity.service";
 
 @Component({
   selector: "app-timeline",
@@ -47,6 +48,7 @@ export class TimelineComponent {
 
   constructor(
     private _loadingService: LoadingService,
+    private _activityService: ActivityService,
     private _tripService: TripService,
     private _toastSavingService: ToastSavingService
   ) {}
@@ -79,7 +81,7 @@ export class TimelineComponent {
     this.openActionSheet.set(false);
     this._loadingService.showLoading();
     const activityId = this.activityToDelete.id;
-    this._tripService
+    this._activityService
       .deleteActivity(this.id(), this.date(), activityId)
       .subscribe({
         next: () => this.removeActivity(activityId),

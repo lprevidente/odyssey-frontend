@@ -58,48 +58,4 @@ export class TripService {
   public deleteTrip(id: string): Observable<void> {
     return this._httpClient.delete<void>(`${this._endpoint}/${id}`);
   }
-
-  public deleteActivity(
-    id: string,
-    date: Date,
-    activityId: string
-  ): Observable<void> {
-    const dateStr = format(date, "yyyy-MM-dd");
-    return this._httpClient.delete<void>(
-      `${this._endpoint}/${id}/activities/${dateStr}/${activityId}`
-    );
-  }
-
-  public addActivity(
-    id: string,
-    date: Date,
-    activity:
-      | NewEntertainment
-      | NewEatery
-      | NewTransportation
-      | NewAccommodation
-  ): Observable<Activity> {
-    const dateStr = format(date, "yyyy-MM-dd");
-    return this._httpClient.post<Activity>(
-      `${this._endpoint}/${id}/activities/${dateStr}`,
-      activity
-    );
-  }
-
-  public updateActivity(
-    id: string,
-    date: Date,
-    activityId: string,
-    activity:
-      | NewEntertainment
-      | NewEatery
-      | NewTransportation
-      | NewAccommodation
-  ): Observable<Activity> {
-    const dateStr = format(date, "yyyy-MM-dd");
-    return this._httpClient.put<Activity>(
-      `${this._endpoint}/${id}/activities/${dateStr}/${activityId}`,
-      activity
-    );
-  }
 }

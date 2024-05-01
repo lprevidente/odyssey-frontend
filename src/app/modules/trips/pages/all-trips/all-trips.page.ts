@@ -38,15 +38,7 @@ export class AllTripsPage {
     );
   }
 
-  private _isUpcoming(trip: TripInfo): boolean {
-    return trip.dateRange.to >= new Date();
-  }
-
-  private _isPast(trip: TripInfo): boolean {
+  protected isExpired(trip: TripInfo): boolean {
     return trip.dateRange.to < new Date();
-  }
-
-  protected _isActive(trip: TripInfo): boolean {
-    return trip.dateRange.from >= new Date() && trip.dateRange.to <= new Date();
   }
 }

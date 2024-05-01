@@ -52,21 +52,34 @@
   <div class="trips">
     @for (trip of trips(); track trackByFn) {
 
-    <ion-card routerLink="/tabs/trips/{{trip.id}}">
+    <ion-card
+      [class.expired]="isExpired(trip)"
+      routerLink="/tabs/trips/{{trip.id}}">
       <span class="date">{{ range(trip) }}</span>
       <img
         class="thumbnail"
         alt="{{ trip.name }}"
         [src]="trip.imageURL" />
       <span class="name">{{ trip.name }}</span>
-      <span class="price">480 $</span>
-      <div class="shared-with">
-        <ion-avatar>
-          <img
-            alt="avatar"
-            src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-        </ion-avatar>
-      </div>
+      @if (isExpired(trip)) {
+      <span class="expired">
+        <ion-icon
+          class="align-middle"
+          name="time-outline"></ion-icon>
+        Expired
+      </span>
+      } @if (trip.expenses) {
+      <span class="price"></span>
+      }
+      <!-- shared with
+        <div class="shared-with">
+          <ion-avatar>
+            <img
+              alt="avatar"
+              src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+        </div>
+        -->
     </ion-card>
     } @empty {
     <div class="empty">

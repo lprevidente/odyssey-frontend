@@ -10,6 +10,7 @@ export interface TripInfo {
   dateRange: DateRange;
   people: People;
   place: Place;
+  expenses: number | null;
 }
 
 export interface TripDetails {

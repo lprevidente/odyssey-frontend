@@ -36,6 +36,10 @@
     height: 150px;
     position: relative;
 
+    &.expired {
+      opacity: 0.6;
+    }
+
     .thumbnail {
       filter: brightness(60%);
       max-width: 100%;
@@ -45,6 +49,7 @@
       transform: translate(-50%, -50%);
     }
 
+    .expired,
     .name,
     .date,
     .shared-with,
@@ -61,6 +66,14 @@
       top: 50%;
       left: 50%;
       font-size: 26px;
+    }
+
+    .expired {
+      font-weight: 400;
+      transform: translate(-50%, -50%);
+      top: 70%;
+      left: 50%;
+      font-size: 18px;
     }
 
     .date,
